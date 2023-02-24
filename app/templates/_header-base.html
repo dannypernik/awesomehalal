@@ -1,26 +1,24 @@
-<div class="row sticky-header justify-content-center">
-  <div class="col-10">
-    <div class="row">
-      <div class="col-9">
-        {% block logo_link %}
-          <a href="{{ url_for('index', _anchor='#contact') }}">
-        {% endblock logo_link %}
-          <img id="nav-img" src="{{ url_for('static', filename='img/logo.svg') }}">
-        </a>
+<div class="sticky-header row justify-content-center">
+  <div class="d-none d-md-flex col-md-3 p-2">
+    {% block logo_link %}
+      <a href="{{ url_for('index', _anchor='#contact') }}">
+    {% endblock logo_link %}
+    <img id="site-menu-icon" class="img-fluid"
+      src="{{ url_for('static', filename='img/icon.svg') }}" >
+    </a>
+  </div>
+
+  <div class="col-7">
+    <a id="site-menu-link" data-drawer-trigger aria-controls="site-menu" aria-expanded="false">
+      <div id="site-menu-title" class="d-none d-sm-block">
+        {% if current_user.is_authenticated %}
+          {{ current_user.first_name }} {{ current_user.last_name }}
+        {% else %}
+          Menu
+        {% endif %}
       </div>
-      <div class="col-3">
-        <a id="menu-btn" data-drawer-trigger aria-controls="site-menu" aria-expanded="false">
-          <div id="menu-title" class="d-none d-sm-block">
-            {% if current_user.is_authenticated %}
-              {{ current_user.first_name }} {{ current_user.last_name }}
-            {% else %}
-              Menu
-            {% endif %}
-          </div>
-          <img id="menu-icon" src="{{ url_for('static', filename='img/menu.svg') }}" alt="">
-        </a>
-      </div>
-    </div>
+      <img id="site-menu-btn" src="{{ url_for('static', filename='img/menu.svg') }}" alt="">
+    </a>
   </div>
 </div>
 

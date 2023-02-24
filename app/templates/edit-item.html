@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <form method="post" >
+    {{ form.hidden_tag() }}
+    {{ form.name.label }}
+    {{ form.name }}
+    {{ form.price.label }}
+    {{ form.price }}
+    {{ form.category.label }}
+    {{ form.category }}
+    {{ form.description.label }}
+    {{ form.description }}
+    {{ form.is_veg }}
+    {{ form.is_veg.label }}
+    <label for="order">Reorder (lower numbers display higher in category)</label>
+    {{ form.order }}
+    
+    <div class="row">
+      <div class="col-8">
+        {{ form.save }}
+      </div>
+      <div class="col-4">
+        <button type="button" class="btn clr alert w-100" data-bs-toggle="modal" 
+            data-bs-target="#delete-modal" data-text="delete">
+          Delete
+        </button>
+      </div>
+      <div class="col-12 text-center">
+        <a href="{{ url_for('items') }}" class="btn clr sm">
+          Item list
+        </a>
+      </div>
+
+    <div id="delete-modal" class="modal fade" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="modal-header mt-2">
+                <h1 class="modal-title">Are you sure?</h1>
+              </div>
+            </div>
+            <div class="modal-body">
+              <button class="btn clr alert d-inline me-2" type="submit" name="delete">Delete {{ item.name }}</button>
+              <button class="btn d-inline" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+{% endblock content %}

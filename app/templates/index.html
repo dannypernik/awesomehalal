@@ -19,8 +19,8 @@
       <div class="col-11 col-md-10">
         <div class="row justify-content-center justify-content-md-end">
           <div class="home-nav col col-md-7 col-lg-6 col-xl-5">
-            <div><a href="#home" data-text="home">home</a></div>
-            <div><a href="{{ url_for('about') }}" data-text="about">about</a></div>
+            <div><a href="#menu" data-text="menu">menu</a></div>
+            <div><a href="" data-bs-toggle="modal" data-bs-target="#order-modal" data-text="order">order</a></div>
             <div><a href="#contact" data-text="contact">contact</a></div>
           </div>
         </div>
@@ -29,22 +29,20 @@
 
     <div class="row justify-content-center">
       <div class="col-11 col-sm-12">
-        <img id="home-logo" class="img-fluid"
-          src="{{ url_for('static', filename='img/logo.svg') }}" alt="">
-        <h1 id="home-title">Something Great</h1>
-        <h1 id="home-tagline">Make it yours.</h1>
+        <!-- <img id="home-logo" class="img-fluid"
+          src="{{ url_for('static', filename='img/icon.svg') }}" alt=""> -->
+        <h1 id="home-title" class="title-margin">awesome halal!</h1>
+        <h1 id="home-tagline">(and gyro!)</h1>
       </div>
     </div>
     <div class="row justify-content-center">
       <div class="col col-sm-11">
-        <a href="" class="cta btn">
-          Call to action
-        </a>
+
 
         <div class="home-next">
-          <a href="#home-2">
+          <a href="#appetizers">
             <h4>
-              Learn more
+              LET'S EAT
             </h4>
             <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi
                 bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -56,55 +54,95 @@
     </div>
   </div>
 
-  {% include "_header-index.html" %}
-
-  <div id="home-2" class="home-section">
-    <div class="row justify-content-center">
-      <div class="col-11 col-sm-10 col-lg-8">
-        <h1 class="mb-4">Section 2 title</h1>
-        <div class="text-center">
-          <a class="cta btn mb-2" href="#contact">
-            Get in touch
-          </a>
-        </div>
-        <div class="home-next">
-          <a href="#home-3">
-            <h4>
-              Section 3
-            </h4>
-            <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-chevron-down"
-                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-            </svg>
-          </a>
+  <div id="order-modal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="modal-header mt-2">
+              <h1 class="modal-title">Order catering</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              Please send us a message with details of your order, and we will be in touch.
+            </div>
+            <div class="mt-1">
+              <a href="#contact">
+                <button class="btn me-1 my-1" data-bs-toggle="modal" data-bs-dismiss="modal">
+                  Contact us
+                </button>
+              </a>
+              <!--<a class="chownow-order-online btn sec my-1" href="https://ordering.chownow.com/order/30097/locations" target="_blank">
+                Order now
+              </a>
+              <div class="ms-1 my-2">
+                <a href="https://www.ezcater.com/catering/pvt/hotswords-3">
+                  Order catering
+                </a>
+              </div>-->
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div id="home-3" class="home-section inverse">
+  {% include '_menu-header.html' %}
+
+  <div id="menu" class="home-section">
     <div class="row justify-content-center">
-      <div class="col-11 col-sm-10 col-lg-8">
-        <h1 class="mb-4">Section 3 title</h1>
-        <div class="home-next">
-          <a href="#contact">
-            <h4>
-              Have a question?
-            </h4>
-            <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-chevron-down"
-                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-            </svg>
-          </a>
-        </div>
+      <div class="col-11 col-sm-10">
+
+        {% include '_menu.html' %}
+
       </div>
+    </div>
+
+    <div class="home-next row">
+      <a href="#contact" class="mt-4">
+        <h4>
+          CONTACT
+        </h4>
+        <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi
+            bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+        </svg>
+      </a>
     </div>
   </div>
 
   <div id="contact" class="home-section end">
-    <div class="row justify-content-center">
-      <div class="col-11 col-md-8">
-        <h1 class="mb-4">Get in touch</h1>
+    <div class="row">
+      <div class="col-10 col-md-7 offset-1">
+
+        <h1 class="mb-3">visit us</h1>
+        <p class="subheader">Kenny Dorham's Backyard</p>
+        <p>
+          1106 East 11th Street<br />
+          Austin, TX 78702
+        </p>
+        <p class="subheader">Hours</p>
+        <p>
+          Tuesday to Sunday:<br/>
+          Closed Monday<br/>
+        </p>
+        <p>
+          <span class="subheader">Phone:</span>
+          <a href="tel:+1-737-333-8557">
+            (737) 333-8557
+          </a>
+        </p>
+
+        <p>
+          <span class="subheader mb-3">Email:</span>
+          <a href="mailto:awesomehalalandgyro@gmail.com">
+            awesomehalalandgyro@gmail.com
+          </a>
+        </p>
+        
+        <h1 class="mt-4 mb-3">get in touch</h1>
 
         <form id="inquiry-form" action="" method="post">
           {{ form.hidden_tag() }}
@@ -121,11 +159,6 @@
 {% endblock container %}
 
 {% block end_scripts %}
-  <script src="{{ url_for('static', filename='js/zenscroll-min.js') }}"></script>
-  <script>
-    zenscroll.setup(null, 0);
-  </script>
-
   <script>
     function onSubmit(token) {
      document.getElementById("inquiry-form").submit();

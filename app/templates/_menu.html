@@ -1,0 +1,54 @@
+{% for c in categories[0] %}
+  <h1 id="{{ c.replace(' ','-') }}" class="category-title">{{ c }}</h1>
+
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      {% for i in items %}
+        {% if i.category == c %}
+          <div class="row mb-2">
+            <div class="food-name col-9">
+              {{ i.name }}
+
+              {% if i.is_veg %}
+                <img class="veg-icon" src="{{ url_for('static', filename='img/veg.svg') }}" />
+              {% endif %}
+            </div>
+            <div class="food-price col-3 text-end">
+              ${{ i.price }}
+            </div>
+            <div class="food-info col">
+              {{ i.description }}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="col-11 col-md-5 offset-md-1">
+      <div class="glider-contain">
+        <div class="glider">
+          {% set count = namespace(value=0) %}
+          {% for i in items %}
+              {% if i.category == c and i.name.replace(' ','-') + '.jpg' in images %}
+                {% set count.value = count.value + 1 %}
+                <div>
+                  <img src="{{ url_for('static', filename='img/' + i.name.replace(' ','-') + '.jpg') }}">
+                  <p class="img-caption my-2">{{ i.name }}</p>
+                </div>
+              {% endif %}
+          {% endfor %}
+        </div>
+
+        {% if count.value > 1 %}
+          <div aria-label="Previous" class="glider-prev">
+            <i class="arrow fas fa-chevron-circle-left"></i>
+          </div>
+          <div aria-label="Next" class="glider-next">
+            <i class="arrow fas fa-chevron-circle-right"></i>
+          </div>
+          <div role="tablist" class="dots"></div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endfor %}

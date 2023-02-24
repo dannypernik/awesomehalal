@@ -3,9 +3,9 @@ from flask import Flask, render_template, flash, Markup, redirect, url_for, \
     request, send_from_directory, send_file, make_response
 from app import app, db, login, hcaptcha
 from app.forms import ContactForm, EmailListForm, SignupForm, LoginForm, UserForm, \
-    RequestPasswordResetForm, ResetPasswordForm
+    RequestPasswordResetForm, ResetPasswordForm, ItemForm
 from flask_login import current_user, login_user, logout_user, login_required, login_url
-from app.models import User
+from app.models import User, Item
 from werkzeug.urls import url_parse
 from datetime import datetime
 from app.email import send_contact_email, send_verification_email, send_password_reset_email
@@ -21,6 +21,8 @@ def dir_last_updated(folder):
     return str(max(os.path.getmtime(os.path.join(root_path, f))
                    for root_path, dirs, files in os.walk(folder)
                    for f in files))
+
+admin_email = app.config['MAIL_USERNAME']
 
 @app.context_processor
 def inject_values():
@@ -43,6 +45,11 @@ def admin_required(f):
 @app.route('/index', methods=['GET', 'POST'])
 def index():
     form = ContactForm()
+    categories = Item.query.with_entities(Item.category).distinct()
+    items = Item.query.order_by(Item.order).all()
+    images = []
+    for i in os.listdir('app/static/img'):
+        images.append(i)
     if form.validate_on_submit():
         if hcaptcha.verify():
             pass
@@ -57,8 +64,12 @@ def index():
             flash('Please check ' + user.email + ' for a confirmation email. Thank you for reaching out!')
             return redirect(url_for('index', _anchor="home"))
         else:
-            flash('Email failed to send, please contact ' + hello, 'error')
-    return render_template('index.html', form=form)
+            flash('Email failed to send, please contact ' + admin_email, 'error')
+    return render_template('index.html', form=form, categories=categories, items=items, \
+        images=images)
+
+
+
 
 
 @app.route('/about')
@@ -82,7 +93,7 @@ def signup():
     signup_form = SignupForm()
     if signup_form.validate_on_submit():
         user = User(first_name=signup_form.first_name.data, last_name=signup_form.last_name.data, \
-        email=signup_form.email.data)
+        email=signup_form.email.data.lower())
         user.set_password(signup_form.password.data)
         db.session.add(user)
         db.session.commit()
@@ -91,7 +102,7 @@ def signup():
         if email_status == 200:
             flash("Welcome! Please check your inbox to verify your email.")
         else:
-            flash('Verification email failed to send, please contact ' + hello, 'error')
+            flash('Verification email failed to send, please contact ' + admin_email, 'error')
         next = request.args.get('next')
         if not next or url_parse(next).netloc != '':
             return redirect(url_for('start_page'))
@@ -107,9 +118,9 @@ def login():
     form = LoginForm()
     signup_form = SignupForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = User.query.filter_by(email=form.email.data.lower()).first()
         if user is None or not user.check_password(form.password.data):
-            flash('Invalid username or password')
+            flash('Invalid username or password', 'error')
             return redirect(url_for('signin'))
         login_user(user)
         if user.is_verified != True:
@@ -117,7 +128,7 @@ def login():
             if email_status == 200:
                 flash('Please check your inbox to verify your email.')
             else:
-                flash('Verification email did not send. Please contact ' + hello)
+                flash('Verification email did not send. Please contact ' + admin_email)
         next = request.args.get('next')
         if not next or url_parse(next).netloc != '':
             return redirect(url_for('start_page'))
@@ -134,9 +145,9 @@ def logout():
 @app.route('/start-page')
 def start_page():
     if current_user.is_admin:
-        return redirect(url_for('users'))
+        return redirect(url_for('items'))
     else:
-        return redirect(url_for('home'))
+        return redirect(url_for('index'))
 
 
 @app.route('/verify-email/<token>', methods=['GET', 'POST'])
@@ -151,7 +162,7 @@ def verify_email(token):
         flash('Thank you for verifying your account.')
         return redirect(url_for('start_page'))
     else:
-        flash('Your verification link is expired or invalid. Log in to receive a new link.')
+        flash('Your verification link is expired or invalid. Log in to receive a new link.', 'error')
         return redirect(url_for('signin'))
 
 
@@ -170,7 +181,7 @@ def request_password_reset():
             if email_status == 200:
                 flash('Check your email for instructions to reset your password.')
             else:
-                flash('Email failed to send, please contact ' + hello, 'error')
+                flash('Email failed to send, please contact ' + admin_email, 'error')
         else:
             flash('Check your email for instructions to reset your password')
         return redirect(url_for('signin'))
@@ -181,7 +192,7 @@ def request_password_reset():
 def set_password(token):
     user = User.verify_email_token(token)
     if not user:
-        flash('The password reset link is expired or invalid. Please try again.')
+        flash('The password reset link is expired or invalid. Please try again.', 'error')
         return redirect(url_for('request_password_reset'))
     form = ResetPasswordForm()
     if form.validate_on_submit():
@@ -198,25 +209,9 @@ def set_password(token):
 @admin_required
 def users():
     form = UserForm(None)
-    roles = ['parent', 'student', 'admin']
-    active_users = User.query.order_by(User.first_name).filter((User.status == 'active'))
-    other_users = User.query.order_by(User.first_name).filter((User.status != 'active') | (User.status == None) | \
-        (User.role.notin_(roles)) | (User.role == None))
-    parents = User.query.filter_by(role='parent')
-    parent_list = [(0,'')]+[(u.id, u.first_name + " " + u.last_name) for u in parents]
-    form.parent_id.choices = parent_list
     if form.validate_on_submit():
         user = User(first_name=form.first_name.data, last_name=form.last_name.data, \
-            email=form.email.data, phone=form.phone.data, location=form.location.data, \
-            role=form.role.data, is_admin=False)
-        if form.status.data == 'none':
-            user.status=None
-        else:
-            user.status=form.status.data
-        if form.parent_id.data == 0:
-            user.parent_id=None
-        else:
-            user.parent_id=form.parent_id.data
+            email=form.email.data.lower(), is_admin=False)
         try:
             db.session.add(user)
             db.session.commit()
@@ -226,8 +221,7 @@ def users():
             flash(user.first_name + ' could not be added', 'error')
             return redirect(url_for('users'))
         return redirect(url_for('users'))
-    return render_template('users.html', title="Users", form=form, active_users=active_users, \
-        other_users=other_users, roles=roles)
+    return render_template('users.html', title="Users", form=form)
 
 
 @app.route('/edit-user/<int:id>', methods=['GET', 'POST'])
@@ -235,23 +229,12 @@ def users():
 def edit_user(id):
     user = User.query.get_or_404(id)
     form = UserForm(user.email, obj=user)
-    parents = User.query.order_by(User.first_name).filter_by(role='parent')
-    parent_list = [(0,'')]+[(u.id, u.first_name + " " + u.last_name) for u in parents]
-    form.parent_id.choices = parent_list
     if form.validate_on_submit():
         if 'save' in request.form:
             user.first_name=form.first_name.data
             user.last_name=form.last_name.data
-            user.email=form.email.data
-            user.phone=form.phone.data
-            user.location=form.location.data
-            user.status=form.status.data
-            user.role=form.role.data
+            user.email=form.email.data.lower()
             user.is_admin=form.is_admin.data
-            if form.parent_id.data == 0:
-                user.parent_id=None
-            else:
-                user.parent_id=form.parent_id.data
 
             try:
                 db.session.add(user)
@@ -272,13 +255,70 @@ def edit_user(id):
         form.first_name.data=user.first_name
         form.last_name.data=user.last_name
         form.email.data=user.email
-        form.phone.data=user.phone
-        form.location.data=user.location
-        form.status.data=user.status
-        form.role.data=user.role
-        form.parent_id.data=user.parent_id
         form.is_admin.data=user.is_admin
     return render_template('edit-user.html', title='Edit User', form=form, user=user)
+
+
+@app.route('/items', methods=['GET', 'POST'])
+@admin_required
+def items():
+    form = ItemForm()
+    items = Item.query.order_by(Item.order).all()
+    categories = Item.query.with_entities(Item.category).distinct()
+    if form.validate_on_submit():
+        item = Item(name=form.name.data.lower(), category=form.category.data.lower(), price=form.price.data, \
+            description=form.description.data, order=form.order.data, is_veg=form.is_veg.data)
+        try:
+            db.session.add(item)
+            db.session.commit()
+            flash(item.name + ' added')
+        except:
+            db.session.rollback()
+            flash(item.name + ' could not be added', 'error')
+    return render_template('items.html', title="Menu items", form=form, items=items, categories=categories)
+
+
+@app.route('/edit-item/<int:id>', methods=['GET', 'POST'])
+@admin_required
+def edit_item(id):
+    form = ItemForm()
+    item = Item.query.get_or_404(id)
+    if form.validate_on_submit():
+        if 'save' in request.form:
+            item.name=form.name.data.lower()
+            item.category=form.category.data.lower()
+            item.price=form.price.data
+            item.description=form.description.data
+            item.order=form.order.data
+            item.is_veg=form.is_veg.data
+
+            # if form.category_id.data == 0:
+            #     category = Category(name=form.category_id.data)
+            # else:
+            #     category = Category.query.filter_by(name=form.category_id.data).first()
+
+            try:
+                db.session.add(item)
+                db.session.commit()
+                flash(item.name + ' updated')
+            except:
+                db.session.rollback()
+                flash(item.name + ' could not be updated', 'error')
+        elif 'delete' in request.form:
+            db.session.delete(item)
+            db.session.commit()
+            flash('Deleted ' + item.name)
+        else:
+            flash('Code error in POST request', 'error')
+        return redirect(url_for('items'))
+    elif request.method == "GET":
+        form.name.data=item.name
+        form.category.data=item.category
+        form.price.data=item.price
+        form.description.data=item.description
+        form.order.data=item.order
+        form.is_veg.data=item.is_veg
+    return render_template('edit-item.html', title="Edit item", form=form, item=item)
 
 
 @app.route("/download/<filename>")
@@ -321,16 +361,6 @@ def sitemap():
                     "loc": f"{host_base}{str(rule)}"
                 }
                 static_urls.append(url)
-
-    # # Dynamic routes with dynamic content
-    # dynamic_urls = list()
-    # blog_posts = Post.objects(published=True)
-    # for post in blog_posts:
-    #     url = {
-    #         "loc": f"{host_base}/blog/{post.category.name}/{post.url}",
-    #         "lastmod": post.date_published.strftime("%Y-%m-%dT%H:%M:%SZ")
-    #         }
-    #     dynamic_urls.append(url)
 
     xml_sitemap = render_template('sitemap/sitemap.xml', static_urls=static_urls, host_base=host_base) #dynamic_urls=dynamic_urls)
     response = make_response(xml_sitemap)

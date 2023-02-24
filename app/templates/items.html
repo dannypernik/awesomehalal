@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div>
+    <button id="add-item" class="btn d-inline-block me-2 mt-0">Add item</button>
+  </div>
+
+  <form id="add-item-form" class="collapsed" action="" method="post">
+    <h1 class="mb-3 me-3 d-inline-block">Add item</h1>
+    <a id="hide-form" href="#">Hide</a>
+
+    {{ form.hidden_tag() }}
+    {{ form.name }}
+    {{ form.category }}
+    {{ form.price }}
+    {{ form.description }}
+    {{ form.is_veg }}
+    {{ form.is_veg.label }}
+    {{ form.order }}
+    {{ form.save }}
+  </form>
+
+
+  {% for c in categories[0] %}
+    <h1 class="slide-toggle mb-2 mt-3">{{ c.title() }}</h1>
+    <div id="{{ c }}" class="item-list">
+      {% for i in items %}
+        {% if i.category == c %}
+          <a href="{{ url_for('edit_item', id=i.id) }}">
+            {{ i.name }}
+          </a>: ${{ i.price }}
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endfor %}  
+{% endblock content %}
+
+{% block end_scripts %}
+  <script>
+    const slideDown = element => element.style.height = `${element.scrollHeight}px`;
+    const slideUp = element => element.style.height = '0px';
+
+    document.getElementById("add-item").addEventListener("click", function () {
+      this.parentElement.classList.add('d-none');
+      slideDown(document.getElementById("add-item-form"));
+    });
+
+    document.getElementById("hide-form").addEventListener("click", function () {
+      slideUp(this.parentElement);
+      document.getElementById("add-item").parentElement.classList.remove('d-none');
+    });
+  </script>
+{% endblock end_scripts %}

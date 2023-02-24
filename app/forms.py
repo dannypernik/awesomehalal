@@ -1,10 +1,10 @@
 from flask_wtf import FlaskForm, RecaptchaField
 from wtforms import StringField, BooleanField, PasswordField, TextAreaField, \
-    SubmitField, IntegerField, SelectField, validators
+    SubmitField, IntegerField, SelectField, DecimalField, validators
 from wtforms.fields.html5 import DateField
 from wtforms.validators import ValidationError, InputRequired, DataRequired, \
     Email, EqualTo, Length
-from app.models import User
+from app.models import User, Item
 
 
 def validate_email(self, email):
@@ -83,11 +83,6 @@ class UserForm(FlaskForm):
         validators=[InputRequired()])
     email = StringField('Email address', render_kw={"placeholder": "Email address"}, \
         validators=[InputRequired(), Email(message="Please enter a valid email address")])
-    phone = StringField('Phone', render_kw={"placeholder": "Phone"})
-    location = StringField('Location', render_kw={"placeholder": "Location"})
-    status = SelectField('Status', choices=[('none','None'),('active', 'Active'),('paused','Paused'),('inactive','Inactive')])
-    role = SelectField('Role', choices=[('student', 'Student'),('parent', 'Parent'),('admin','Admin')])
-    parent_id = SelectField('Parent', coerce=int)
     is_admin = BooleanField('Admin')
     submit = SubmitField('Save')
 
@@ -100,3 +95,16 @@ class UserForm(FlaskForm):
             user = User.query.filter_by(email=email.data).first()
             if user is not None:
                 raise ValidationError('An account already exists for ' + user.email + '.')
+
+
+class ItemForm(FlaskForm):
+    name = StringField('Item name', render_kw={'placeholder': 'Item name'}, \
+        validators=[InputRequired()])
+    price = StringField('Price', render_kw={'placeholder': 'Price'}, \
+        validators=[InputRequired()])
+    description = TextAreaField('Description', render_kw={'placeholder': 'Description'})
+    category = StringField('Category', render_kw={'placeholder': 'Category'}, \
+        validators=[InputRequired()])
+    order = DecimalField('Reorder', render_kw={'placeholder': 'Reorder (lower numbers display first)'})
+    is_veg = BooleanField('Vegetarian?')
+    save = SubmitField('Save')

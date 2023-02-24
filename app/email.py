@@ -37,7 +37,7 @@ def send_contact_email(user, message):
         send_confirmation_email(user, message)
         print("Contact email sent from " + user.email)
     else:
-        print("Contact email from " + user.email + " failed with code " + result.status_code)
+        print("Contact email from " + user.email + " failed with code " + str(result.status_code))
     return result.status_code
 
 
@@ -68,7 +68,7 @@ def send_confirmation_email(user, message):
     if result.status_code == 200:
         print("Confirmation email sent to " + user.email)
     else:
-        print("Confirmation email to " + user.email + " failed to send with code " + result.status_code, result.reason)
+        print("Confirmation email to " + user.email + " failed to send with code", result.status_code, result.reason)
     return result.status_code
 
 
@@ -102,7 +102,7 @@ def send_verification_email(user):
     if result.status_code == 200:
         print("Verification email sent to " + user.email)
     else:
-        print("Verification email to " + user.email + " failed with code " + result.status_code)
+        print("Verification email to " + user.email + " failed with code ", result.status_code, result.reason)
     return result.status_code
 
 
@@ -140,5 +140,5 @@ def send_password_reset_email(user):
     if result.status_code == 200:
         print(result.json())
     else:
-        print("Password reset email failed to send with code " + str(result.status_code), result.reason)
+        print("Password reset email failed to send with code ", result.status_code, result.reason)
     return result.status_code

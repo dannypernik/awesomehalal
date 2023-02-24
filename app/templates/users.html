@@ -15,20 +15,6 @@
     {{ form.email }}
     {{ form.phone }}
     {{ form.location }}
-    <div class="d-none">
-      {{ form.status }}
-      {{ form.is_admin }}
-    </div>
-    <div class="d-sm-flex mt-3 justify-content-between">
-      <div class="mb-2">
-        <h3 class="mb-1">Role:</h3>
-        {{ form.role }}
-      </div>
-      <div id="parent-div" class="mb-2">
-        <h3 class="mb-1">Parent:</h3>
-        {{ form.parent_id }}
-      </div>
-    </div>
   
     {{ form.submit(class="mb-3") }}
   </form>
