@@ -21,6 +21,12 @@ $alert-color: #850017;
 
 @import "menu.css";
 
+@mixin fill-color($color: $secondary-color) {
+  background-color: $color;
+  border-color: $color;
+  color: white;
+}
+
 // Base //
 
 html {
@@ -115,45 +121,47 @@ a {
 }
 
 button, .btn, input[type="submit"] {
+  @include fill-color();
   display: block;
   margin: 2rem auto;
   padding: 1rem 2rem;
-  background-color: $secondary-color;
-  color: white;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 0.3rem;
   transition: 0.3s;
   font-size: 1.7rem;
   font-weight: 400;
-  border-width: 0;
 
   &:hover {
-    background-color: $secondary-color;
+    @include fill-color();
     filter: brightness(1.1);
-    color: white;
   }
 
   &.sm {
     background-color: transparent;
     color: $primary-color;
-    border-color: $primary-color;
+    border: 1px solid $primary-color;
     margin-top: 1rem;
     padding: 0.5rem 1rem;
+
+    &:hover {
+      @include fill-color($primary-color);
+    }
   }
   
   &.sec {
-    background-color: $primary-color;
+    @include fill-color($primary-color);
     font-weight: 400;
     width: fit-content;
   }
   
   &.alert {
+    background-color: transparent;
     color: $alert-color;
     border-color: $alert-color;
-    background-color: transparent;
 
     &:hover {
-      background-color: $alert-color;
-      border-color: $alert-color;
-      color: white;
+      @include fill-color($alert-color);
     }
   }
 }
@@ -317,13 +325,11 @@ div.message {
   font-size: 1.5rem;
   margin-bottom: 0;
   color: $message-color;
-  background-color: lighten($message-color, 90%);
-  border-color: lighten($message-color, 90%);
+  background-color: lighten($message-color, 65%);
 
   &.error {
     color: $alert-color;
-    background-color: lighten($alert-color, 95%);
-    border-color: lighten($alert-color, 95%);
+    background-color: lighten($alert-color, 70%);
   }
 
   a {
@@ -545,7 +551,7 @@ div.message {
 // Menu //
 
 .category-title {
-  margin-top: calc(3.5rem + 1vw);
+  margin-top: calc(1.5rem + 1vw);
 }
 
 .food-name, .food-price {

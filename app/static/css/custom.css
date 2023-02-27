@@ -6737,37 +6737,48 @@ a.btn:hover {
 }
 
 button, .btn, input[type=submit] {
+  background-color: #f99d13;
+  border-color: #f99d13;
+  color: white;
   display: block;
   margin: 2rem auto;
   padding: 1rem 2rem;
-  background-color: #f99d13;
-  color: white;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 0.3rem;
   transition: 0.3s;
   font-size: 1.7rem;
   font-weight: 400;
-  border-width: 0;
 }
 button:hover, .btn:hover, input[type=submit]:hover {
   background-color: #f99d13;
-  filter: brightness(1.1);
+  border-color: #f99d13;
   color: white;
+  filter: brightness(1.1);
 }
 button.sm, .btn.sm, input[type=submit].sm {
   background-color: transparent;
   color: #3671e9;
-  border-color: #3671e9;
+  border: 1px solid #3671e9;
   margin-top: 1rem;
   padding: 0.5rem 1rem;
 }
+button.sm:hover, .btn.sm:hover, input[type=submit].sm:hover {
+  background-color: #3671e9;
+  border-color: #3671e9;
+  color: white;
+}
 button.sec, .btn.sec, input[type=submit].sec {
   background-color: #3671e9;
+  border-color: #3671e9;
+  color: white;
   font-weight: 400;
   width: fit-content;
 }
 button.alert, .btn.alert, input[type=submit].alert {
+  background-color: transparent;
   color: #850017;
   border-color: #850017;
-  background-color: transparent;
 }
 button.alert:hover, .btn.alert:hover, input[type=submit].alert:hover {
   background-color: #850017;
@@ -6908,13 +6919,11 @@ div.message {
   font-size: 1.5rem;
   margin-bottom: 0;
   color: #004085;
-  background-color: white;
-  border-color: white;
+  background-color: #d2e7ff;
 }
 div.message.error {
   color: #850017;
-  background-color: white;
-  border-color: white;
+  background-color: #ffebee;
 }
 div.message a {
   text-decoration: underline;
@@ -7110,7 +7119,7 @@ div.message a {
 }
 
 .category-title {
-  margin-top: calc(3.5rem + 1vw);
+  margin-top: calc(1.5rem + 1vw);
 }
 
 .food-name, .food-price {
