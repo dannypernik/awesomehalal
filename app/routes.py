@@ -267,14 +267,18 @@ def items():
     categories = Item.query.with_entities(Item.category).distinct()
     if form.validate_on_submit():
         item = Item(name=form.name.data.lower(), category=form.category.data.lower(), price=form.price.data, \
-            description=form.description.data, order=form.order.data, is_veg=form.is_veg.data)
+            description=form.description.data, is_veg=form.is_veg.data)
         try:
+            db.session.add(item)
+            db.session.flush()
+            item.order = item.id
             db.session.add(item)
             db.session.commit()
             flash(item.name + ' added')
         except:
             db.session.rollback()
             flash(item.name + ' could not be added', 'error')
+        return redirect(url_for('items'))
     return render_template('items.html', title="Menu items", form=form, items=items, categories=categories)
 
 

@@ -1,10 +1,10 @@
-{% for c in categories[0] %}
-  <h1 id="{{ c.replace(' ','-') }}" class="category-title">{{ c }}</h1>
+{% for c in categories %}
+  <h1 id="{{ c[0].replace(' ','-') }}" class="category-title">{{ c[0] }}</h1>
 
   <div class="row justify-content-center">
     <div class="col-md-6">
       {% for i in items %}
-        {% if i.category == c %}
+        {% if i.category == c[0] %}
           <div class="row mb-3">
             <div class="food-name col-9">
               {{ i.name }}
@@ -29,7 +29,7 @@
         <div class="glider">
           {% set count = namespace(value=0) %}
           {% for i in items %}
-              {% if i.category == c and i.name.replace(' ','-') + '.jpg' in images %}
+              {% if i.category == c[0] and i.name.replace(' ','-') + '.jpg' in images %}
                 {% set count.value = count.value + 1 %}
                 <div>
                   <img src="{{ url_for('static', filename='img/' + i.name.replace(' ','-') + '.jpg') }}">
