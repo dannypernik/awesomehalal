@@ -21,13 +21,13 @@
         {{ form.save }}
       </div>
       <div class="col-4">
-        <button type="button" class="btn clr alert w-100" data-bs-toggle="modal" 
+        <button type="button" class="btn alert w-100" data-bs-toggle="modal" 
             data-bs-target="#delete-modal" data-text="delete">
           Delete
         </button>
       </div>
       <div class="col-12 text-center">
-        <a href="{{ url_for('items') }}" class="btn clr sm">
+        <a href="{{ url_for('items') }}" class="btn sm">
           Item list
         </a>
       </div>
@@ -42,7 +42,7 @@
               </div>
             </div>
             <div class="modal-body">
-              <button class="btn clr alert d-inline me-2" type="submit" name="delete">Delete {{ item.name }}</button>
+              <button class="btn alert d-inline me-2" type="submit" name="delete">Delete {{ item.name }}</button>
               <button class="btn d-inline" data-bs-dismiss="modal">Cancel</button>
             </div>
           </div>

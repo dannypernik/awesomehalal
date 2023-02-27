@@ -6748,38 +6748,21 @@ button, .btn, input[type=submit] {
   border-width: 0;
 }
 button:hover, .btn:hover, input[type=submit]:hover {
-  background-color: #ec9006;
+  background-color: #f99d13;
+  filter: brightness(1.1);
+  color: white;
 }
 button.sm, .btn.sm, input[type=submit].sm {
-  font-weight: 400;
-  border-width: 1px;
+  background-color: transparent;
+  color: #3671e9;
+  border-color: #3671e9;
   margin-top: 1rem;
   padding: 0.5rem 1rem;
 }
-button.clr, .btn.clr, input[type=submit].clr {
-  background-color: transparent;
-  border: 2px solid white;
-}
 button.sec, .btn.sec, input[type=submit].sec {
-  color: #3671e9;
-  border-color: #3671e9;
-  background-color: transparent;
+  background-color: #3671e9;
   font-weight: 400;
   width: fit-content;
-}
-button.highlight, .btn.highlight, input[type=submit].highlight {
-  background-color: #d35137;
-  border: none;
-}
-button.highlight:hover, .btn.highlight:hover, input[type=submit].highlight:hover {
-  background-color: #b94129;
-}
-button.cta, .btn.cta, input[type=submit].cta {
-  margin-top: calc(2rem + 1vw);
-  font-size: calc(2rem + 0.1vw);
-}
-button .row:hover > div > .btn.edit, .btn .row:hover > div > .btn.edit, input[type=submit] .row:hover > div > .btn.edit {
-  display: inline-block;
 }
 button.alert, .btn.alert, input[type=submit].alert {
   color: #850017;
@@ -6790,6 +6773,20 @@ button.alert:hover, .btn.alert:hover, input[type=submit].alert:hover {
   background-color: #850017;
   border-color: #850017;
   color: white;
+}
+
+.inverse {
+  color: white;
+}
+.inverse a {
+  color: white;
+}
+.inverse a.sm, .inverse a.sec {
+  color: white;
+}
+.inverse a:hover {
+  color: #f99d13;
+  filter: brightness(1.1);
 }
 
 input, textarea {
@@ -6904,23 +6901,6 @@ select {
   padding: 0.5rem 1rem;
 }
 
-.inverse {
-  color: white;
-}
-.inverse button, .inverse .btn, .inverse input[type=submit] {
-  background-color: #f99d13;
-  border-color: #f99d13;
-}
-.inverse button:hover, .inverse .btn:hover, .inverse input[type=submit]:hover {
-  background-color: #bb7205;
-  border-color: #bb7205;
-}
-
-.img-fluid {
-  max-width: 100%;
-  height: auto;
-}
-
 div.message {
   padding: 0.5rem 0;
   text-align: center;
@@ -6941,14 +6921,6 @@ div.message a {
   white-space: nowrap;
 }
 
-.title-margin {
-  padding-top: calc(2rem + 3vw);
-}
-
-#contact {
-  position: relative;
-}
-
 .sticky-header {
   position: -webkit-sticky;
   position: sticky;
@@ -6959,25 +6931,25 @@ div.message a {
   z-index: 100;
 }
 
-#food, #contact {
-  overflow: unset;
-}
-
 #menu-header {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   padding: 1rem 0;
-  color: white;
-}
-
-#site-menu-icon {
-  height: 40px;
 }
 
 #header-img {
   height: 40px;
-  padding: 4px;
+}
+
+#order-btn {
+  background-color: transparent;
+  font-weight: 600;
+  border: 2px solid #f99d13;
+}
+#order-btn:hover {
+  background-color: #f99d13;
+  color: white;
 }
 
 .header-item {
@@ -6986,7 +6958,6 @@ div.message a {
 }
 
 .header-item a {
-  color: white;
   text-transform: uppercase;
 }
 
@@ -7043,18 +7014,6 @@ div.message a {
   background-color: #3671e9;
   color: white;
   margin-top: 11rem;
-}
-
-.food-name, .food-price {
-  font-weight: 600;
-  color: #f99d13;
-  text-transform: uppercase;
-}
-
-.veg-icon {
-  position: absolute;
-  height: 1.5rem;
-  margin: 0.25rem 1rem;
 }
 
 #home-1 {
@@ -7118,14 +7077,14 @@ div.message a {
   list-style: none;
 }
 .home-nav a {
-  color: white;
   font-size: 2rem;
   text-decoration: none;
   padding: calc(3rem + 2vw) 0;
   text-transform: uppercase;
 }
-.home-nav a:hover, .home-nav a:focus {
+.home-nav a:hover {
   font-weight: 600;
+  color: white;
 }
 
 .home-section {
@@ -7154,23 +7113,51 @@ div.message a {
   margin-top: calc(3.5rem + 1vw);
 }
 
-.subheader {
-  color: #f99d13;
+.food-name, .food-price {
   font-weight: 600;
-  margin-bottom: 0;
+  color: #f99d13;
+  text-transform: uppercase;
 }
 
-.profile-img {
-  display: block;
-  border-radius: 100%;
-  margin: 0 auto 2rem;
-  max-height: 155px;
+.veg-icon {
+  position: absolute;
+  height: 1.5rem;
+  margin: 0.25rem 1rem;
+}
+
+.btn-close {
+  --bs-btn-close-bg: none;
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.btn-close:hover {
+  color: #f99d13;
+}
+
+.modal-header {
+  border-bottom: 0;
 }
 
 .collapsed {
   height: 0px;
   transition: height 0.25s ease-out;
   overflow: hidden;
+}
+
+.subheader {
+  color: #f99d13;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.title-margin {
+  padding-top: calc(2rem + 3vw);
 }
 
 .white {

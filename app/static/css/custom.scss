@@ -91,7 +91,6 @@ a {
   display: inline-block;
   text-decoration: none;
   color: $primary-color;
-  //transition: all 0.2s ease-in-out;
 
   &:hover {
     color: $secondary-color;
@@ -127,45 +126,23 @@ button, .btn, input[type="submit"] {
   border-width: 0;
 
   &:hover {
-    background-color: darken($secondary-color, 5%);
+    background-color: $secondary-color;
+    filter: brightness(1.1);
+    color: white;
   }
 
   &.sm {
-    font-weight: 400;
-    border-width: 1px;
+    background-color: transparent;
+    color: $primary-color;
+    border-color: $primary-color;
     margin-top: 1rem;
     padding: 0.5rem 1rem;
   }
-
-  &.clr {
-    background-color: transparent;
-    border: 2px solid white;
-  }
   
   &.sec {
-    color: $primary-color;
-    border-color: $primary-color;
-    background-color: transparent;
+    background-color: $primary-color;
     font-weight: 400;
     width: fit-content;
-  }
-  
-  &.highlight {
-    background-color: $highlight-color;
-    border: none;
-
-    &:hover {
-      background-color: darken($highlight-color, 8%);//#b03e28;
-    }
-  }
-  
-  &.cta {
-    margin-top: calc(2rem + 1vw);
-    font-size: $lead-font-size;
-  }
-  
-  .row:hover > div > .btn.edit {
-    display: inline-block;
   }
   
   &.alert {
@@ -177,6 +154,25 @@ button, .btn, input[type="submit"] {
       background-color: $alert-color;
       border-color: $alert-color;
       color: white;
+    }
+  }
+}
+
+// Styling for dark backgrounds //
+
+.inverse {
+  color: white;
+
+  a {
+    color: white;
+
+    &.sm, &.sec {
+      color: white;
+    }
+
+    &:hover {
+      color: $secondary-color;
+      filter: brightness(1.1);
     }
   }
 }
@@ -312,26 +308,7 @@ select {
   padding: 0.5rem 1rem;
 }
 
-// Styling for dark backgrounds //
-
-.inverse {
-  color: white;
-
-  button, .btn, input[type="submit"] {
-    background-color: $secondary-color;
-    border-color: $secondary-color;
-
-    &:hover {
-      background-color: darken($secondary-color, 15%);
-      border-color: darken($secondary-color, 15%);
-    }
-  }
-}
-
-.img-fluid {
-  max-width: 100%;
-  height: auto;
-}
+// Status messages //
 
 div.message {
   padding: 0.5rem 0;
@@ -355,14 +332,6 @@ div.message {
   }
 }
 
-.title-margin {
-  padding-top: calc(2rem + 3vw);
-}
-
-#contact {
-  position: relative;
-}
-
 // Nav //
 
 .sticky-header {
@@ -375,25 +344,26 @@ div.message {
   z-index: 100;
 }
 
-#food, #contact {
-  overflow: unset;
-}
-
 #menu-header {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   padding: 1rem 0;
-  color: white;
-}
-
-#site-menu-icon {
-  height: 40px;
 }
 
 #header-img {
   height: 40px;
-  padding: 4px;
+}
+
+#order-btn {
+  background-color: transparent;
+  font-weight: 600;
+  border: 2px solid $secondary-color;
+
+  &:hover {
+    background-color: $secondary-color;
+    color: white;
+  }
 }
 
 .header-item {
@@ -402,7 +372,6 @@ div.message {
 }
 
 .header-item a {
-  color: white;
   text-transform: uppercase;
 }
 
@@ -431,6 +400,8 @@ div.message {
   height: 28px;
   padding-left: 15px;
 }
+
+// Site menu drawer //
 
 .drawer__content a {
   display: inline;
@@ -464,19 +435,7 @@ div.message {
   margin-top: 11rem;
 }
 
-.food-name, .food-price {
-  font-weight: 600;
-  color: $secondary-color;
-  text-transform: uppercase;
-}
-
-.veg-icon {
-  position: absolute;
-  height: 1.5rem;
-  margin: 0.25rem 1rem;
-}
-
-// Home page
+// Home page //
 
 #home-1 {
   position: relative;
@@ -498,7 +457,7 @@ div.message {
 
     a {
       color: white;
-
+      
       &:hover {
         color: $secondary-color;
       }
@@ -547,14 +506,14 @@ div.message {
   }
   
   a {
-    color: white;
     font-size: 2rem;
     text-decoration: none;
     padding: calc(3rem + 2vw) 0;
     text-transform: uppercase;
 
-    &:hover, &:focus {
+    &:hover {
       font-weight: 600;
+      color: white;
     }
   }
 }
@@ -583,23 +542,39 @@ div.message {
   font-size: 1rem;
 }
 
+// Menu //
+
 .category-title {
   margin-top: calc(3.5rem + 1vw);
 }
 
-.subheader {
-  color: $secondary-color;
+.food-name, .food-price {
   font-weight: 600;
-  margin-bottom: 0;
+  color: $secondary-color;
+  text-transform: uppercase;
 }
 
-// About page //
+.veg-icon {
+  position: absolute;
+  height: 1.5rem;
+  margin: 0.25rem 1rem;
+}
 
-.profile-img {
-  display: block;
-  border-radius: 100%;
-  margin: 0 auto 2rem;
-  max-height: 155px;
+// Modal //
+
+.btn-close {
+  --bs-btn-close-bg: none;
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1;
+
+  &:hover {
+    color: $secondary-color;
+  }
+}
+
+.modal-header {
+  border-bottom: 0;
 }
 
 // Items page //
@@ -610,7 +585,22 @@ div.message {
   overflow: hidden;
 }
 
-// Single attribute classes //
+// Helper classes //
+
+.subheader {
+  color: $secondary-color;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.title-margin {
+  padding-top: calc(2rem + 3vw);
+}
 
 .white {
   color: white;
