@@ -1,7 +1,8 @@
 <div class="sticky-header inverse row align-items-center justify-content-center mb-3">
   <div class="d-none d-md-flex col-md-2 col-lg-1 p-2 me-lg-3">
-    <img id="header-img" class="img-fluid"
-      src="{{ url_for('static', filename='img/icon.svg') }}" >
+    <a href="#home">
+      <img id="header-img" class="img-fluid" src="{{ url_for('static', filename='img/icon.svg') }}" >
+    </a>
   </div>
   <div id="menu-header" class="col-9 col-md-7 col-xl-9">
     {% for c in categories[:-1] %}

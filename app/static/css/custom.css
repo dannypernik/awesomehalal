@@ -6688,9 +6688,9 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 }
 
 h1, .h1 {
-  font-size: calc(2.5rem + 1.5vw);
+  font-size: calc(2.75rem + 1vw);
   font-weight: 700;
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
 }
 
 h2, .h2 {
@@ -7025,7 +7025,7 @@ div.message a {
   margin-top: 11rem;
 }
 
-#home-1 {
+#home {
   position: relative;
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../img/andrei-slobtsov-x5-Xo86B4O0-unsplash.jpg) center bottom no-repeat;
   background-attachment: fixed;
@@ -7033,27 +7033,27 @@ div.message a {
   min-height: 100vh;
   overflow: auto;
 }
-#home-1 h1, #home-1 .h1 {
+#home h1, #home .h1 {
   color: white;
 }
-#home-1 .home-next {
+#home .home-next {
   position: absolute;
   bottom: 5%;
   left: 50%;
   transform: translateX(-50%);
 }
-#home-1 .home-next a {
+#home .home-next a {
   color: white;
 }
-#home-1 .home-next a:hover {
+#home .home-next a:hover {
   color: #f99d13;
 }
-#home-1 .home-next a h4, #home-1 .home-next a .h4 {
+#home .home-next a h4, #home .home-next a .h4 {
   color: white;
 }
 
 @media screen and (max-width: 575px) {
-  #home-1 {
+  #home {
     background-attachment: scroll;
   }
 }

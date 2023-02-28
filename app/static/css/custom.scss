@@ -80,9 +80,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1, .h1 {
-  font-size: calc(2.5rem + 1.5vw);
+  font-size: calc(2.75rem + 1vw);
   font-weight: 700;
-  margin-bottom: 3rem;
+  margin-bottom: calc(2rem + 0.5rem);
 }
 
 h2, .h2 {
@@ -458,7 +458,7 @@ div.message {
 
 // Home page //
 
-#home-1 {
+#home {
   position: relative;
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../img/andrei-slobtsov-x5-Xo86B4O0-unsplash.jpg) center bottom no-repeat;
   background-attachment: fixed;
@@ -492,7 +492,7 @@ div.message {
 
 // Mobile backgrounds //
 @media screen and (max-width: 575px) {
-  #home-1 {
+  #home {
     background-attachment: scroll;
   }
 }
