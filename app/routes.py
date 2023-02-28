@@ -274,10 +274,10 @@ def items():
             item.order = item.id
             db.session.add(item)
             db.session.commit()
-            flash(item.name + ' added')
+            flash(item.name.title() + ' added')
         except:
             db.session.rollback()
-            flash(item.name + ' could not be added', 'error')
+            flash(item.name.title() + ' could not be added', 'error')
         return redirect(url_for('items'))
     return render_template('items.html', title="Menu items", form=form, items=items, categories=categories)
 
@@ -304,14 +304,14 @@ def edit_item(id):
             try:
                 db.session.add(item)
                 db.session.commit()
-                flash(item.name + ' updated')
+                flash(item.name.title() + ' updated')
             except:
                 db.session.rollback()
-                flash(item.name + ' could not be updated', 'error')
+                flash(item.name.title() + ' could not be updated', 'error')
         elif 'delete' in request.form:
             db.session.delete(item)
             db.session.commit()
-            flash('Deleted ' + item.name)
+            flash('Deleted ' + item.name.title())
         else:
             flash('Code error in POST request', 'error')
         return redirect(url_for('items'))

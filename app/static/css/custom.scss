@@ -34,6 +34,20 @@ html {
   scroll-padding-top: calc(9.5rem + 1vw);
 }
 
+// Adjust widths based on line breaks once categories are decided
+
+// @media screen and (max-width: 833px) {
+//   html {
+//     scroll-padding-top: calc(9.5rem + 1vw);
+//   }
+// }
+
+// @media screen and (max-width: 461px) {
+//   html {
+//     scroll-padding-top: calc(9.5rem + 1vw);
+//   }
+// }
+
 body {
   height: 100%;
   font-family: $body-font;
@@ -375,18 +389,15 @@ div.message {
 .header-item {
   width: auto;
   margin: 0.75rem 1.5rem;
-}
 
-.header-item a {
-  text-transform: uppercase;
+  a {
+    text-transform: uppercase;
+    font-size: 1.6rem;
+  }
 }
 
 #menu-title {
   padding-top: 2px;
-}
-
-#menu {
-  scroll-margin-top: calc(-3.5rem - 1vw);
 }
 
 #site-menu-link {
@@ -405,6 +416,10 @@ div.message {
 #site-menu-btn {
   height: 28px;
   padding-left: 15px;
+}
+
+#menu {
+  scroll-margin-top: calc(-3.5rem - 1vw);
 }
 
 // Site menu drawer //
@@ -513,13 +528,15 @@ div.message {
   
   a {
     font-size: 2rem;
-    text-decoration: none;
     padding: calc(3rem + 2vw) 0;
     text-transform: uppercase;
 
-    &:hover {
+    &:hover, &:focus {
       font-weight: 600;
       color: white;
+      text-decoration: underline;
+      text-underline-offset: 7px;
+      text-decoration-color: $secondary-color;
     }
   }
 }

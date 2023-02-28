@@ -21,14 +21,16 @@
   </form>
 
 
-  {% for c in categories[0] %}
-    <h1 class="slide-toggle mb-2 mt-3">{{ c.title() }}</h1>
-    <div id="{{ c }}" class="item-list">
+  {% for c in categories %}
+    <h1 class="slide-toggle my-3">{{ c[0].title() }}</h1>
+    <div id="{{ c[0] }}" class="item-list">
       {% for i in items %}
-        {% if i.category == c %}
-          <a href="{{ url_for('edit_item', id=i.id) }}">
-            {{ i.name }}
-          </a>: ${{ i.price }}
+        {% if i.category == c[0] %}
+          <div class="mb-2">
+            <a class="semibold" href="{{ url_for('edit_item', id=i.id) }}">
+              {{ i.name.title() }}
+            </a>: ${{ i.price }}
+          </div>
         {% endif %}
       {% endfor %}
     </div>
