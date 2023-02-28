@@ -27,6 +27,13 @@ $alert-color: #850017;
   color: white;
 }
 
+@mixin underline-hover($color: $secondary-color) {
+  text-decoration: underline;
+  text-underline-offset: 7px;
+  text-decoration-color: $color;
+  font-weight: 600;
+}
+
 // Base //
 
 html {
@@ -113,7 +120,7 @@ a {
   color: $primary-color;
 
   &:hover {
-    color: $secondary-color;
+    @include underline-hover();
   }
 
   &:before {
@@ -187,15 +194,14 @@ button, .btn, input[type="submit"] {
 
   a {
     color: white;
+  }
 
-    &.sm, &.sec {
-      color: white;
-    }
+  h4 {
+    color: white;
+  }
 
-    &:hover {
-      color: $secondary-color;
-      filter: brightness(1.1);
-    }
+  .home-next a:hover {
+    color: $secondary-color;
   }
 }
 
@@ -377,12 +383,12 @@ div.message {
 
 #order-btn {
   background-color: transparent;
+  color: white;
   font-weight: 600;
   border: 2px solid $secondary-color;
 
   &:hover {
     background-color: $secondary-color;
-    color: white;
   }
 }
 
@@ -393,6 +399,10 @@ div.message {
   a {
     text-transform: uppercase;
     font-size: 1.6rem;
+
+    &:hover {
+      @include underline-hover();
+    }
   }
 }
 
@@ -475,18 +485,6 @@ div.message {
     bottom: 5%;
     left: 50%;
     transform: translateX(-50%);
-
-    a {
-      color: white;
-      
-      &:hover {
-        color: $secondary-color;
-      }
-
-      h4 {
-        color: white;
-      }
-    }
   }
 }
 
@@ -532,11 +530,8 @@ div.message {
     text-transform: uppercase;
 
     &:hover, &:focus {
-      font-weight: 600;
+      @include underline-hover();
       color: white;
-      text-decoration: underline;
-      text-underline-offset: 7px;
-      text-decoration-color: $secondary-color;
     }
   }
 }
@@ -556,8 +551,13 @@ div.message {
   margin: calc(2rem + 1vw) auto 3rem;
   text-align: center;
 
-  a:hover h4 {
-    font-weight: 600;
+  a:hover {
+    text-decoration: none;
+    color: $secondary-color;
+
+    h4 {
+      font-weight: 600;
+    }
   }
 }
 

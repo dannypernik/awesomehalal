@@ -6719,7 +6719,10 @@ a {
   color: #3671e9;
 }
 a:hover {
-  color: #f99d13;
+  text-decoration: underline;
+  text-underline-offset: 7px;
+  text-decoration-color: #f99d13;
+  font-weight: 600;
 }
 a:before {
   display: block;
@@ -6792,12 +6795,11 @@ button.alert:hover, .btn.alert:hover, input[type=submit].alert:hover {
 .inverse a {
   color: white;
 }
-.inverse a.sm, .inverse a.sec {
+.inverse h4, .inverse .h4 {
   color: white;
 }
-.inverse a:hover {
+.inverse .home-next a:hover {
   color: #f99d13;
-  filter: brightness(1.1);
 }
 
 input, textarea {
@@ -6953,12 +6955,12 @@ div.message a {
 
 #order-btn {
   background-color: transparent;
+  color: white;
   font-weight: 600;
   border: 2px solid #f99d13;
 }
 #order-btn:hover {
   background-color: #f99d13;
-  color: white;
 }
 
 .header-item {
@@ -6968,6 +6970,12 @@ div.message a {
 .header-item a {
   text-transform: uppercase;
   font-size: 1.6rem;
+}
+.header-item a:hover {
+  text-decoration: underline;
+  text-underline-offset: 7px;
+  text-decoration-color: #f99d13;
+  font-weight: 600;
 }
 
 #menu-title {
@@ -7042,15 +7050,6 @@ div.message a {
   left: 50%;
   transform: translateX(-50%);
 }
-#home .home-next a {
-  color: white;
-}
-#home .home-next a:hover {
-  color: #f99d13;
-}
-#home .home-next a h4, #home .home-next a .h4 {
-  color: white;
-}
 
 @media screen and (max-width: 575px) {
   #home {
@@ -7091,11 +7090,11 @@ div.message a {
   text-transform: uppercase;
 }
 .home-nav a:hover, .home-nav a:focus {
-  font-weight: 600;
-  color: white;
   text-decoration: underline;
   text-underline-offset: 7px;
   text-decoration-color: #f99d13;
+  font-weight: 600;
+  color: white;
 }
 
 .home-section {
@@ -7111,6 +7110,10 @@ div.message a {
   display: table;
   margin: calc(2rem + 1vw) auto 3rem;
   text-align: center;
+}
+.home-next a:hover {
+  text-decoration: none;
+  color: #f99d13;
 }
 .home-next a:hover h4, .home-next a:hover .h4 {
   font-weight: 600;
