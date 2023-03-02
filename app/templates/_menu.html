@@ -10,7 +10,7 @@
               {{ i.name }}
 
               {% if i.is_veg %}
-                <img class="veg-icon" src="{{ url_for('static', filename='img/veg.svg') }}" />
+                <img class="veg-icon" src="{{ url_for('static', filename='img/veg.svg') }}" title="Vegetarian"/>
               {% endif %}
             </div>
             <div class="food-price col-3 text-end">
