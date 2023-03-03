@@ -17,6 +17,7 @@ def send_contact_email(user, message):
             {
                 "From": {
                     "Email": app.config['MAIL_USERNAME'],
+                    "Name": "Awesome Halal and Gyro"
                 },
                 "To": [
                     {
@@ -35,9 +36,9 @@ def send_contact_email(user, message):
 
     if result.status_code == 200:
         send_confirmation_email(user, message)
-        print("Contact email sent from " + user.email)
+        print("Contact email sent to " + app.config['MAIL_USERNAME'])
     else:
-        print("Contact email from " + user.email + " failed with code " + str(result.status_code))
+        print("Contact email to " + app.config['MAIL_USERNAME'] + " failed with code " + str(result.status_code))
     return result.status_code
 
 
@@ -51,6 +52,7 @@ def send_confirmation_email(user, message):
             {
                 "From": {
                     "Email": app.config['MAIL_USERNAME'],
+                    "Name": "Awesome Halal and Gyro"
                 },
                 "To": [
                     {
@@ -84,6 +86,7 @@ def send_verification_email(user):
             {
                 "From": {
                     "Email": app.config['MAIL_USERNAME'],
+                    "Name": "Awesome Halal and Gyro"
                 },
                 "To": [
                     {
@@ -122,6 +125,7 @@ def send_password_reset_email(user):
             {
                 "From": {
                     "Email": app.config['MAIL_USERNAME'],
+                    "Name": "Awesome Halal and Gyro"
                 },
                 "To": [
                     {

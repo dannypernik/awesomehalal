@@ -11,6 +11,7 @@ class User(UserMixin, db.Model):
     first_name = db.Column(db.String(32))
     last_name = db.Column(db.String(32))
     email = db.Column(db.String(64), unique=True, index=True)
+    phone = db.Column(db.String(32))
     password_hash = db.Column(db.String(128))
     is_admin = db.Column(db.Boolean)
     is_verified = db.Column(db.Boolean)
