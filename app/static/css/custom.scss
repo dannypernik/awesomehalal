@@ -500,21 +500,21 @@ div.message {
 #home-logo {
   position: relative;
   display: block;
-  margin: 3rem auto;
-  height: calc(80px + 3vw);
+  margin: 0 auto 2rem;
+  height: calc(180px + 3vw);
 }
 
 #home-title {
   font-family: 'Montserrat', Helvetica, sans-serif;
   font-size: calc(3.8rem + 3vw);
-  font-weight: 700;
+  font-weight: 800;
   margin-bottom: 0;
 }
 
 #home-tagline {
   font-family: 'Montserrat';
   font-size: calc(2rem + 2vw);
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .home-nav {

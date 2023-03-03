@@ -1,0 +1,9 @@
+{% extends 'index.html' %}
+
+{% block logo %}
+  <img id="home-logo" class="img-fluid" src="{{ url_for('static', filename='img/logo2.svg') }}">
+{% endblock logo %}
+
+{% block icon %}
+  <img id="header-img" class="img-fluid" src="{{ url_for('static', filename='img/logo2.svg') }}" >
+{% endblock icon %}
