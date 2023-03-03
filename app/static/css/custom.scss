@@ -483,17 +483,7 @@ div.message {
   }
 
   .home-next {
-    position: absolute;
-    bottom: 5%;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-}
-
-// Mobile backgrounds //
-@media screen and (max-width: 575px) {
-  #home {
-    background-attachment: scroll;
+    margin-top: calc(5rem + 3vw);
   }
 }
 
@@ -515,6 +505,21 @@ div.message {
   font-family: 'Montserrat';
   font-size: calc(2rem + 2vw);
   font-weight: 800;
+}
+
+// Mobile backgrounds //
+@media screen and (max-width: 575px) {
+  #home {
+    background-attachment: scroll;
+  }
+
+  #home-title {
+    font-size: 7rem;
+  }
+
+  #home-tagline {
+    font-size: 4rem;
+  }
 }
 
 .home-nav {

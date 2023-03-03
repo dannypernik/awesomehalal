@@ -7150,17 +7150,9 @@ div.message a {
   color: white;
 }
 #home .home-next {
-  position: absolute;
-  bottom: 5%;
-  left: 50%;
-  transform: translateX(-50%);
+  margin-top: calc(5rem + 3vw);
 }
 
-@media screen and (max-width: 575px) {
-  #home {
-    background-attachment: scroll;
-  }
-}
 #home-logo {
   position: relative;
   display: block;
@@ -7181,6 +7173,17 @@ div.message a {
   font-weight: 800;
 }
 
+@media screen and (max-width: 575px) {
+  #home {
+    background-attachment: scroll;
+  }
+  #home-title {
+    font-size: 7rem;
+  }
+  #home-tagline {
+    font-size: 4rem;
+  }
+}
 .home-nav {
   display: flex;
   justify-content: space-between;
