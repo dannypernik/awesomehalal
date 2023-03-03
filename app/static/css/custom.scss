@@ -6,6 +6,7 @@ $body-font: 'Montserrat', 'Helvetica', sans-serif;
 $spacer: 2rem;
 $primary-color: #c5318a;
 $secondary-color: #31ad1f;//58bba4;
+$text-color: darken($primary-color, 10%);
 $underline-color: lighten($secondary-color, 5%);
 $message-color: #004085;
 $alert-color: #850017;
@@ -59,7 +60,7 @@ html {
 body {
   height: 100%;
   font-family: $body-font;
-  color: darken($primary-color, 10%);
+  color: $text-color;
   font-size: $body-font-size;
   font-weight: 400;
   line-height: 1.4;
@@ -216,7 +217,7 @@ input, textarea {
   border-bottom: 1px solid #999;
   width: 100%;
   outline: none;
-  color: $primary-color;
+  color: $text-color;
 
   &:focus {
     border-bottom: 1px solid $primary-color;
