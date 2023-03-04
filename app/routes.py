@@ -54,15 +54,15 @@ def index():
         if hcaptcha.verify():
             pass
         else:
-            flash('A computer has questioned your humanity. Please try again.', 'error')
-            return redirect(url_for('home'))
+            flash('Please confirm your humanity with the hCaptcha checkbox.', 'error')
+            return redirect(url_for('index'))
         user = User(first_name=form.first_name.data, email=form.email.data, phone=form.phone.data)
         message = form.message.data
         subject = form.subject.data
         email_status = send_contact_email(user, message)
         if email_status == 200:
             flash('Please check ' + user.email + ' for a confirmation email. Thank you for reaching out!')
-            return redirect(url_for('index', _anchor="home"))
+            return redirect(url_for('index'))
         else:
             flash('Email failed to send, please contact ' + admin_email, 'error')
     return render_template('index.html', form=form, categories=categories, items=items, \
@@ -81,15 +81,15 @@ def index_2():
         if hcaptcha.verify():
             pass
         else:
-            flash('A computer has questioned your humanity. Please try again.', 'error')
-            return redirect(url_for('home'))
+            flash('Please confirm your humanity with the hCaptcha checkbox.', 'error')
+            return redirect(url_for('index'))
         user = User(first_name=form.first_name.data, email=form.email.data, phone=form.phone.data)
         message = form.message.data
         subject = form.subject.data
         email_status = send_contact_email(user, message)
         if email_status == 200:
             flash('Please check ' + user.email + ' for a confirmation email. Thank you for reaching out!')
-            return redirect(url_for('index', _anchor="home"))
+            return redirect(url_for('index'))
         else:
             flash('Email failed to send, please contact ' + admin_email, 'error')
     return render_template('index2.html', form=form, categories=categories, items=items, \
@@ -108,15 +108,15 @@ def index_3():
         if hcaptcha.verify():
             pass
         else:
-            flash('A computer has questioned your humanity. Please try again.', 'error')
-            return redirect(url_for('home'))
+            flash('Please confirm your humanity with the hCaptcha checkbox.', 'error')
+            return redirect(url_for('index'))
         user = User(first_name=form.first_name.data, email=form.email.data, phone=form.phone.data)
         message = form.message.data
         subject = form.subject.data
         email_status = send_contact_email(user, message)
         if email_status == 200:
             flash('Please check ' + user.email + ' for a confirmation email. Thank you for reaching out!')
-            return redirect(url_for('index', _anchor="home"))
+            return redirect(url_for('index'))
         else:
             flash('Email failed to send, please contact ' + admin_email, 'error')
     return render_template('index3.html', form=form, categories=categories, items=items, \
@@ -224,7 +224,7 @@ def request_password_reset():
         if hcaptcha.verify():
             pass
         else:
-            flash('A computer has questioned your humanity. Please try again.', 'error')
+            flash('Please confirm your humanity with the hCaptcha checkbox.', 'error')
             return redirect(url_for('request_password_reset'))
         user = User.query.filter_by(email=form.email.data).first()
         if user:
