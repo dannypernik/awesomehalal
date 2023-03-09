@@ -6759,7 +6759,7 @@ progress {
 }
 html {
   height: 100%;
-  scroll-padding-top: calc(9.5rem + 1vw);
+  scroll-padding-top: calc(10.5rem + 1vw);
 }
 
 body {
@@ -7053,7 +7053,7 @@ div.message a {
 }
 
 #header-img {
-  height: 40px;
+  height: 70px;
 }
 
 #order-btn {
@@ -7156,7 +7156,7 @@ div.message a {
 #home-logo {
   position: relative;
   display: block;
-  margin: 0 auto 2rem;
+  margin: 2rem auto;
   height: calc(180px + 3vw);
 }
 

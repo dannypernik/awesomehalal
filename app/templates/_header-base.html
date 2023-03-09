@@ -1,10 +1,10 @@
 <div class="sticky-header row justify-content-center">
-  <div class="d-none d-md-flex col-md-3 p-2">
+  <div class="d-none d-md-flex col-md-3">
     {% block logo_link %}
       <a href="{{ url_for('index', _anchor='#contact') }}">
     {% endblock logo_link %}
     <img id="header-img" class="img-fluid"
-      src="{{ url_for('static', filename='img/icon.svg') }}" >
+      src="{{ url_for('static', filename='img/logo-transparent.svg') }}" >
     </a>
   </div>
 

@@ -69,60 +69,6 @@ def index():
         images=images)
 
 
-@app.route('/2')
-def index_2():
-    form = ContactForm()
-    categories = Item.query.with_entities(Item.category).distinct()
-    items = Item.query.order_by(Item.order).all()
-    images = []
-    for i in os.listdir('app/static/img'):
-        images.append(i)
-    if form.validate_on_submit():
-        if hcaptcha.verify():
-            pass
-        else:
-            flash('Please confirm your humanity with the hCaptcha checkbox.', 'error')
-            return redirect(url_for('index'))
-        user = User(first_name=form.first_name.data, email=form.email.data, phone=form.phone.data)
-        message = form.message.data
-        subject = form.subject.data
-        email_status = send_contact_email(user, message)
-        if email_status == 200:
-            flash('Please check ' + user.email + ' for a confirmation email. Thank you for reaching out!')
-            return redirect(url_for('index'))
-        else:
-            flash('Email failed to send, please contact ' + admin_email, 'error')
-    return render_template('index2.html', form=form, categories=categories, items=items, \
-        images=images)
-
-
-@app.route('/3')
-def index_3():
-    form = ContactForm()
-    categories = Item.query.with_entities(Item.category).distinct()
-    items = Item.query.order_by(Item.order).all()
-    images = []
-    for i in os.listdir('app/static/img'):
-        images.append(i)
-    if form.validate_on_submit():
-        if hcaptcha.verify():
-            pass
-        else:
-            flash('Please confirm your humanity with the hCaptcha checkbox.', 'error')
-            return redirect(url_for('index'))
-        user = User(first_name=form.first_name.data, email=form.email.data, phone=form.phone.data)
-        message = form.message.data
-        subject = form.subject.data
-        email_status = send_contact_email(user, message)
-        if email_status == 200:
-            flash('Please check ' + user.email + ' for a confirmation email. Thank you for reaching out!')
-            return redirect(url_for('index'))
-        else:
-            flash('Email failed to send, please contact ' + admin_email, 'error')
-    return render_template('index3.html', form=form, categories=categories, items=items, \
-        images=images)
-
-
 @app.route('/about')
 def about():
     return render_template('about.html', title="About")
