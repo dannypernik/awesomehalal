@@ -40,22 +40,21 @@ $alert-color: #850017;
 
 html {
   height: 100%;
-  scroll-padding-top: calc(10.5rem + 1vw);
+  scroll-padding-top: calc(17rem + 1vw);
 }
 
-// Adjust widths based on line breaks once categories are decided
+@media screen and (min-width: 602px) {
+  html {
+    scroll-padding-top: calc(13.5rem + 1vw);
+  }
+}
 
-// @media screen and (max-width: 833px) {
-//   html {
-//     scroll-padding-top: calc(9.5rem + 1vw);
-//   }
-// }
-
-// @media screen and (max-width: 461px) {
-//   html {
-//     scroll-padding-top: calc(9.5rem + 1vw);
-//   }
-// }
+@media screen and (min-width: 1200px) {
+  html {
+    scroll-padding-top: calc(10.5rem + 1vw);
+    
+  }
+}
 
 body {
   height: 100%;

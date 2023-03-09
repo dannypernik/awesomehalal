@@ -6759,9 +6759,19 @@ progress {
 }
 html {
   height: 100%;
-  scroll-padding-top: calc(10.5rem + 1vw);
+  scroll-padding-top: calc(17rem + 1vw);
 }
 
+@media screen and (min-width: 602px) {
+  html {
+    scroll-padding-top: calc(13.5rem + 1vw);
+  }
+}
+@media screen and (min-width: 1200px) {
+  html {
+    scroll-padding-top: calc(10.5rem + 1vw);
+  }
+}
 body {
   height: 100%;
   font-family: "Montserrat", "Helvetica", sans-serif;
