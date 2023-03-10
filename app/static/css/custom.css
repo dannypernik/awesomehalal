@@ -6864,7 +6864,7 @@ button, .btn, input[type=submit] {
   border-radius: 0.3rem;
   transition: 0.3s;
   font-size: 1.7rem;
-  font-weight: 400;
+  font-weight: 600;
 }
 button:hover, .btn:hover, input[type=submit]:hover {
   background-color: #31ad1f;
@@ -6888,7 +6888,6 @@ button.sec, .btn.sec, input[type=submit].sec {
   background-color: #c5318a;
   border-color: #c5318a;
   color: white;
-  font-weight: 400;
   width: fit-content;
 }
 button.alert, .btn.alert, input[type=submit].alert {
@@ -7081,12 +7080,10 @@ div.message a {
 .header-item {
   width: auto;
   margin: 0.75rem 1.5rem;
-}
-.header-item a {
   text-transform: uppercase;
   font-size: 1.6rem;
 }
-.header-item a:hover {
+.header-item:hover {
   text-decoration: underline;
   text-underline-offset: 7px;
   text-decoration-color: #37c323;

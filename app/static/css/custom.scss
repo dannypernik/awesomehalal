@@ -152,7 +152,7 @@ button, .btn, input[type="submit"] {
   border-radius: 0.3rem;
   transition: 0.3s;
   font-size: 1.7rem;
-  font-weight: 400;
+  font-weight: 600;
 
   &:hover {
     @include fill-color();
@@ -173,7 +173,6 @@ button, .btn, input[type="submit"] {
   
   &.sec {
     @include fill-color($primary-color);
-    font-weight: 400;
     width: fit-content;
   }
   
@@ -396,14 +395,11 @@ div.message {
 .header-item {
   width: auto;
   margin: 0.75rem 1.5rem;
-
-  a {
-    text-transform: uppercase;
-    font-size: 1.6rem;
-
-    &:hover {
-      @include underline-hover();
-    }
+  text-transform: uppercase;
+  font-size: 1.6rem;
+  
+  &:hover {
+    @include underline-hover();
   }
 }
 
