@@ -66,7 +66,7 @@
     <div id="menu-header" class="col-9 col-md-7 col-xl-9">
       {% for c in categories[:-1] %}
         <div class="text-nowrap">
-          <a href="#{{ c[0] }}" data-text="{{ c[0] }}"
+          <a href="#{{ c[0].replace(' ','-') }}" data-text="{{ c[0].replace(' ','-') }}"
             class="header-item">
             {{ c[0] }}
           </a>&bull;
@@ -75,7 +75,7 @@
   
       <!-- remove bullet separator after last category -->
       <div class="header-item">
-        <a href="#{{ categories[-1][0] }}" data-text="{{ categories[-1][0] }}">
+        <a href="#{{ categories[-1][0].replace(' ','-') }}" data-text="{{ categories[-1][0].replace(' ','-') }}">
           {{ categories[-1][0] }}
         </a>
       </div>
