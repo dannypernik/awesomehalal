@@ -6759,15 +6759,15 @@ progress {
 }
 html {
   height: 100%;
-  scroll-padding-top: calc(17rem + 1vw);
+  scroll-padding-top: 17rem;
 }
 
-@media screen and (min-width: 646px) {
+@media screen and (min-width: 593px) {
   html {
-    scroll-padding-top: calc(13.5rem + 1vw);
+    scroll-padding-top: 13.5rem;
   }
 }
-@media screen and (min-width: 1216px) {
+@media screen and (min-width: 1248px) {
   html {
     scroll-padding-top: calc(10.5rem + 1vw);
   }
@@ -7079,7 +7079,7 @@ div.message a {
 
 .header-item {
   width: auto;
-  margin: 0.75rem 1.5rem;
+  margin: 0.75rem 1rem;
   text-transform: uppercase;
   font-size: 1.6rem;
 }

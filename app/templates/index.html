@@ -63,7 +63,7 @@
         {% endblock icon %}
       </a>
     </div>
-    <div id="menu-header" class="col-9 col-md-8 col-lg-7 col-xl-9">
+    <div id="menu-header" class="col-9 col-md-8 col-lg-7 col-xl-8">
       {% for c in categories[:-1] %}
         <div class="text-nowrap">
           <a href="#{{ c[0].replace(' ','-') }}" data-text="{{ c[0].replace(' ','-') }}"
@@ -81,7 +81,8 @@
       </div>
     </div>
   
-    <div class="d-flex col-2 col-xl-1 overflow-hidden justify-content-end">
+    <div class="d-flex col-3 col-md-2 col-xl-1 overflow-hidden justify-content-center
+    justify-content-md-end">
       <a id="order-btn" class="btn sm m-0" href="#" data-bs-toggle="modal" data-bs-target="#order-modal" data-text="order">ORDER</a>
     </div>
   </div>
