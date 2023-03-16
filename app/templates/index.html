@@ -54,8 +54,8 @@
     </div>
   </div>
 
-  <div class="sticky-header inverse row align-items-center justify-content-center mb-3">
-    <div class="d-none d-md-flex col-md-2 col-lg-1 me-lg-3">
+  <div class="sticky-header g-0 inverse row align-items-center justify-content-center mb-3">
+    <div class="d-none d-md-flex col-md-1 me-md-3">
       <a href="#home">
         {% block icon %}
           <img id="header-img" class="img-fluid"
@@ -63,7 +63,7 @@
         {% endblock icon %}
       </a>
     </div>
-    <div id="menu-header" class="col-9 col-md-7 col-xl-9">
+    <div id="menu-header" class="col-9 col-md-8 col-lg-7 col-xl-9">
       {% for c in categories[:-1] %}
         <div class="text-nowrap">
           <a href="#{{ c[0].replace(' ','-') }}" data-text="{{ c[0].replace(' ','-') }}"
