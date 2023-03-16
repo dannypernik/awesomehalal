@@ -43,16 +43,15 @@ html {
   scroll-padding-top: calc(17rem + 1vw);
 }
 
-@media screen and (min-width: 602px) {
+@media screen and (min-width: 830px) {
   html {
     scroll-padding-top: calc(13.5rem + 1vw);
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1216px) {
   html {
     scroll-padding-top: calc(10.5rem + 1vw);
-    
   }
 }
 
