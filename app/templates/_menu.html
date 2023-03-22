@@ -32,8 +32,8 @@
               {% if i.category == c[0] and i.name.replace(' ','-') + '.jpg' in images %}
                 {% set count.value = count.value + 1 %}
                 <div>
-                  <img src="{{ url_for('static', filename='img/' + i.name.replace(' ','-') + '.jpg') }}">
-                  <p class="img-caption my-2">{{ i.name }}</p>
+                  <img src="{{ url_for('static', filename='img/items/' + i.name.replace(' ','-') + '.jpg') }}">
+                  <p class="img-caption my-2">{{ i.name.title() }}</p>
                 </div>
               {% endif %}
           {% endfor %}
@@ -41,10 +41,22 @@
 
         {% if count.value > 1 %}
           <div aria-label="Previous" class="glider-prev">
-            <i class="arrow fas fa-chevron-circle-left"></i>
+            <svg class="chevron left" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+              <path d="M845 1395l454-454q19-19 19-45t-19-45l-454-454q-19-19-45-19t-45
+              19l-102 102q-19 19-19 45t19 45l307 307-307 307q-19 19-19 45t19 45l102 102q19
+              19 45 19t45-19zm819-499q0 209-103 385.5t-279.5 279.5-385.5
+              103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5
+              103 279.5 279.5 103 385.5z"/>
+            </svg>
           </div>
           <div aria-label="Next" class="glider-next">
-            <i class="arrow fas fa-chevron-circle-right"></i>
+            <svg class="chevron right" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+              <path d="M845 1395l454-454q19-19 19-45t-19-45l-454-454q-19-19-45-19t-45
+              19l-102 102q-19 19-19 45t19 45l307 307-307 307q-19 19-19 45t19 45l102 102q19
+              19 45 19t45-19zm819-499q0 209-103 385.5t-279.5 279.5-385.5
+              103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5
+              103 279.5 279.5 103 385.5z"/>
+            </svg>
           </div>
           <div role="tablist" class="dots"></div>
         {% endif %}
@@ -52,3 +64,22 @@
     </div>
   </div>
 {% endfor %}
+
+<script src="{{ url_for('static', filename='js/glider.min.js') }}"></script>
+    <script type="text/javascript">
+      window.addEventListener('load', function(){
+        [].forEach.call(document.querySelectorAll('.glider'), function (ele) {
+          new Glider(ele, {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            draggable: true,
+            scrollLock: true,
+            duration: 3,
+            arrows: {
+                prev: ele.parentNode.querySelector('.glider-prev'),
+                next: ele.parentNode.querySelector('.glider-next')
+            }
+          });
+        });
+      });
+    </script>

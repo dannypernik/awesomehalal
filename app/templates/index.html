@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
+{% block head %}
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/glider.min.css') }}">
+
+  {{ super() }}
+{% endblock head %}
 {% block navbar %}{% endblock navbar %}
 
 {% block container %}
@@ -209,30 +214,10 @@
 {% endblock container %}
 
 {% block end_scripts %}
-  <script>
+  <!-- <script>
     function onSubmit(token) {
      document.getElementById("inquiry-form").submit();
     }
-
-    // scroll to anchor in url after page loads
-    window.onload = function goToAnchor() { 
-      hash = document.location.hash;
-      if (hash !="") {
-          setTimeout(function() {
-              if (location.hash) {
-                  window.scrollTo(0, 0);
-                  window.location.href = hash;
-              }
-          }, 1);
-      }
-      else {
-          return false;
-      }
-    }
-
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-      return new bootstrap.Tooltip(tooltipTriggerEl)
-    })
-  </script>
+  </script> -->
+  
 {% endblock end_scripts %}

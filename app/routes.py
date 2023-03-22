@@ -48,7 +48,7 @@ def index():
     categories = Item.query.with_entities(Item.category).distinct()
     items = Item.query.order_by(Item.order).all()
     images = []
-    for i in os.listdir('app/static/img'):
+    for i in os.listdir('app/static/img/items'):
         images.append(i)
     if form.validate_on_submit():
         if hcaptcha.verify():

@@ -7255,6 +7255,50 @@ div.message a {
   margin: 0.25rem 1rem;
 }
 
+.glider-contain {
+  max-width: 360px;
+}
+
+.glider-slide {
+  margin: 0 5px;
+}
+
+.glider p {
+  max-width: 350px;
+  text-align: center;
+}
+
+.glider-prev, .glider-next {
+  top: auto;
+  bottom: calc(50% + 10px);
+  left: -36px;
+  color: #c5318a;
+  text-align: center;
+  width: 20px;
+}
+
+.glider-next {
+  right: -30px;
+  left: auto;
+}
+
+.glider-prev:focus, .glider-next:focus, .glider-next:hover, .glider-prev:hover {
+  color: #31ad1f;
+}
+
+.chevron {
+  height: 25px;
+  display: inline-block;
+  fill: #777;
+  transition: 0.2s fill ease-in;
+}
+.chevron.left {
+  transform: rotate(180deg);
+}
+.chevron:hover {
+  fill: #c5318a;
+}
+
 #kd-logo {
   width: 200px;
   margin-bottom: 2rem;

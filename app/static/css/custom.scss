@@ -585,6 +585,55 @@ div.message {
   margin: 0.25rem 1rem;
 }
 
+// Glider customizations
+
+.glider-contain {
+  max-width: 360px;
+}
+
+.glider-slide {
+  margin: 0 5px;
+}
+
+.glider p {
+  max-width: 350px;
+  text-align: center;
+}
+
+.glider-prev, .glider-next {
+  top: auto;
+  bottom: calc(50% + 10px);
+  left: -36px;
+  color: $primary-color;
+  text-align: center;
+  width: 20px;
+}
+
+.glider-next {
+  right: -30px;
+  left: auto;
+}
+
+.glider-prev:focus, .glider-next:focus, .glider-next:hover, .glider-prev:hover {
+  color: $secondary-color;
+}
+
+.chevron{
+  height: 25px;
+  display: inline-block;
+  fill: #777;
+  transition: 0.2s fill ease-in;
+
+  &.left {
+    transform: rotate(180deg);
+  }
+
+  &:hover {
+    fill: $primary-color;
+  }
+}
+
+
 // Contact //
 
 #kd-logo {
