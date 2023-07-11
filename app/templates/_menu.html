@@ -66,20 +66,21 @@
 {% endfor %}
 
 <script src="{{ url_for('static', filename='js/glider.min.js') }}"></script>
-    <script type="text/javascript">
-      window.addEventListener('load', function(){
-        [].forEach.call(document.querySelectorAll('.glider'), function (ele) {
-          new Glider(ele, {
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            draggable: true,
-            scrollLock: true,
-            duration: 3,
-            arrows: {
-                prev: ele.parentNode.querySelector('.glider-prev'),
-                next: ele.parentNode.querySelector('.glider-next')
-            }
-          });
-        });
+
+<script type="text/javascript">
+  window.addEventListener('load', function(){
+    [].forEach.call(document.querySelectorAll('.glider'), function (ele) {
+      new Glider(ele, {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        draggable: true,
+        scrollLock: true,
+        duration: 3,
+        arrows: {
+            prev: ele.parentNode.querySelector('.glider-prev'),
+            next: ele.parentNode.querySelector('.glider-next')
+        }
       });
-    </script>
+    });
+  });
+</script>
