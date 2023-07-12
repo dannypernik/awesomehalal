@@ -1,10 +1,10 @@
 {% for c in categories %}
-  <h1 id="{{ c[0].replace(' ','-') }}" class="category-title">{{ c[0] }}</h1>
+  <h1 id="{{ c.name.replace(' ','-') }}" class="category-title">{{ c.name }}</h1>
 
   <div class="row justify-content-center">
     <div class="col-md-6">
       {% for i in items %}
-        {% if i.category == c[0] %}
+        {% if i.category_id == c.id %}
           <div class="row mb-3">
             <div class="food-name col-9">
               {{ i.name }}
