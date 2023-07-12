@@ -74,7 +74,7 @@
         <div class="text-nowrap">
           <a href="#{{ c.name.replace(' ','-') }}" data-text="{{ c.name.replace(' ','-') }}"
             class="header-item">
-            {{ c[0] }}
+            {{ c.name }}
           </a>&bull;
         </div>
       {% endfor %}
@@ -82,7 +82,7 @@
       <!-- remove bullet separator after last category -->
       <div class="header-item">
         <a href="#{{ categories[-1].name.replace(' ','-') }}" data-text="{{ categories[-1].name.replace(' ','-') }}">
-          {{ categories[-1][0] }}
+          {{ categories[-1].name }}
         </a>
       </div>
     </div>
