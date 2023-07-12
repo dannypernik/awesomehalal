@@ -3,9 +3,9 @@ from flask import Flask, render_template, flash, Markup, redirect, url_for, \
     request, send_from_directory, send_file, make_response
 from app import app, db, login, hcaptcha
 from app.forms import ContactForm, EmailListForm, SignupForm, LoginForm, UserForm, \
-    RequestPasswordResetForm, ResetPasswordForm, ItemForm
+    RequestPasswordResetForm, ResetPasswordForm, ItemForm, CategoryForm
 from flask_login import current_user, login_user, logout_user, login_required, login_url
-from app.models import User, Item
+from app.models import User, Item, Category
 from werkzeug.urls import url_parse
 from datetime import datetime
 from app.email import send_contact_email, send_verification_email, send_password_reset_email
@@ -45,7 +45,8 @@ def admin_required(f):
 @app.route('/index', methods=['GET', 'POST'])
 def index():
     form = ContactForm()
-    categories = Item.query.with_entities(Item.category).distinct()
+    # categories = Category.query.order_by(Category.order).distinct()
+    categories = Category.query.order_by(Category.order).distinct()
     items = Item.query.order_by(Item.order).all()
     images = []
     for i in os.listdir('app/static/img/items'):
@@ -259,9 +260,19 @@ def edit_user(id):
 @app.route('/items', methods=['GET', 'POST'])
 @admin_required
 def items():
-    form = ItemForm()
+    item_form = ItemForm()
+    category_form = CategoryForm()
     items = Item.query.order_by(Item.order).all()
-    categories = Item.query.with_entities(Item.category).distinct()
+    categories = Category.query.order_by(Category.order).distinct()
+
+    return render_template('items.html', title="Menu items", item_form=item_form, \
+        category_form=category_form, items=items, categories=categories)
+
+
+@app.route('/new-item', methods=['POST'])
+@admin_required
+def new_item():
+    form = ItemForm()
     if form.validate_on_submit():
         item = Item(name=form.name.data.lower(), category=form.category.data.lower(), price=form.price.data, \
             description=form.description.data, is_veg=form.is_veg.data)
@@ -276,7 +287,26 @@ def items():
             db.session.rollback()
             flash(item.name.title() + ' could not be added', 'error')
         return redirect(url_for('items'))
-    return render_template('items.html', title="Menu items", form=form, items=items, categories=categories)
+    return render_template('items.html')
+
+
+@app.route('/new-category', methods=['POST'])
+@admin_required
+def new_category():
+    form = CategoryForm()
+    if form.validate_on_submit():
+        category = Category(name=form.name.data.lower())
+        try:
+            db.session.add(category)
+            db.session.flush()
+            category.order = category.id
+            db.session.commit()
+            flash(category.name.title() + ' added')
+        except:
+            db.session.rollback()
+            flash(category.name.title() + ' could not be added', 'error')
+        return redirect(url_for('items'))
+    return render_template('items.html')
 
 
 @app.route('/edit-item/<int:id>', methods=['GET', 'POST'])
@@ -320,6 +350,35 @@ def edit_item(id):
         form.order.data=item.order
         form.is_veg.data=item.is_veg
     return render_template('edit-item.html', title="Edit item", form=form, item=item)
+
+
+@app.route('/edit-category/<int:id>', methods=['GET', 'POST'])
+@admin_required
+def edit_category(id):
+    form = CategoryForm()
+    category = Category.query.get_or_404(id)
+    if form.validate_on_submit():
+        if 'save' in request.form:
+            category.name=form.name.data.lower()
+            category.order=form.order.data
+            try:
+                db.session.add(category)
+                db.session.commit()
+                flash(category.name.title() + ' updated')
+            except:
+                db.session.rollback()
+                flash(category.name.title() + ' could not be updated', 'error')
+        elif 'delete' in request.form:
+            db.session.delete(category)
+            db.session.commit()
+            flash('Deleted ' + category.name.title())
+        else:
+            flash('Code error in POST request', 'error')
+        return redirect(url_for('items'))
+    elif request.method == "GET":
+        form.name.data=category.name
+        form.order.data=category.order
+    return render_template('edit-category.html', title="Edit category", form=form, category=category)
 
 
 @app.route("/download/<filename>")

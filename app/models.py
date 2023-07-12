@@ -52,6 +52,17 @@ class Item(db.Model):
     category = db.Column(db.String(64))
     order = db.Column(db.Float())
     is_veg = db.Column(db.Boolean)
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
 
     def __repr__(self):
         return '<Item {}>'.format(self.name)
+
+
+class Category(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64), unique=True)
+    order = db.Column(db.Float())
+    items = db.relationship('Item', backref='section', lazy='dynamic')
+
+    def __repr__(self):
+        return '<Category {}>'.format(self.name)

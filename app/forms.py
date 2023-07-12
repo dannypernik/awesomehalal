@@ -105,7 +105,15 @@ class ItemForm(FlaskForm):
     description = TextAreaField('Description', render_kw={'placeholder': 'Description'})
     category = StringField('Category', render_kw={'placeholder': 'Category'}, \
         validators=[InputRequired()])
-    order = DecimalField('Reorder', render_kw={'placeholder': 'Reorder (lower numbers display first)'}, \
+    order = DecimalField('Order', render_kw={'placeholder': 'Order'}, \
         validators=(validators.Optional(),))
     is_veg = BooleanField('Vegetarian?')
-    save = SubmitField('Save')
+    submit = SubmitField('Save')
+
+
+class CategoryForm(FlaskForm):
+    name = StringField('Category name', render_kw={'placeholder': 'Category name'}, \
+        validators=[InputRequired()])
+    order = DecimalField('Order', render_kw={'placeholder': 'Order'}, \
+        validators=(validators.Optional(),))
+    submit = SubmitField('Save')
