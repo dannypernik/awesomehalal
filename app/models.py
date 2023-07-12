@@ -49,7 +49,6 @@ class Item(db.Model):
     name = db.Column(db.String(64))
     price = db.Column(db.String(5))
     description = db.Column(db.String(1024))
-    category = db.Column(db.String(64))
     order = db.Column(db.Float())
     is_veg = db.Column(db.Boolean)
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
