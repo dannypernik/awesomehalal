@@ -3,29 +3,44 @@
 {% block content %}
   <div>
     <button id="add-item" class="btn d-inline-block me-2 mt-0">Add item</button>
+    <button id="add-category" class="btn sec d-inline-block me-2 mt-0">Add category</button>
+    <!-- <a href="{{ url_for('new_category') }}" class="btn sec d-inline-block me-2 mt-0">Add category</a> -->
   </div>
 
-  <form id="add-item-form" class="collapsed" action="" method="post">
+  <form id="add-item-form" class="collapsed" action="{{ url_for('new_item') }}" method="post">
     <h1 class="mb-3 me-3 d-inline-block">Add item</h1>
-    <a id="hide-form" href="#">Hide</a>
+    <a class="hide-form" href="#">Hide</a>
 
-    {{ form.hidden_tag() }}
-    {{ form.name }}
-    {{ form.category }}
-    {{ form.price }}
-    {{ form.description }}
-    {{ form.is_veg }}
-    {{ form.is_veg.label(class="ms-2 mt-2") }}
-    {{ form.order(class="d-none") }}
-    {{ form.save }}
+    {{ item_form.hidden_tag() }}
+    {{ item_form.name }}
+    {{ item_form.category }}
+    {{ item_form.price }}
+    {{ item_form.description }}
+    {{ item_form.is_veg }}
+    {{ item_form.is_veg.label(class="ms-2 mt-2") }}
+    {{ item_form.order(class="d-none") }}
+    {{ item_form.submit }}
+  </form>
+
+  <form id="add-category-form" class="collapsed" action="{{ url_for('new_category') }}" method="post">
+    <h1 class="mb-3 me-3 d-inline-block">Add category</h1>
+    <a class="hide-form" href="#">Hide</a>
+    {{ category_form.hidden_tag() }}
+    {{ category_form.name }}
+    {{ category_form.order }}
+    {{ category_form.submit }}
   </form>
 
 
   {% for c in categories %}
-    <h1 class="slide-toggle my-3">{{ c[0].title() }}</h1>
-    <div id="{{ c[0] }}" class="item-list">
+    <h1 class="slide-toggle my-3">
+      <a href="{{ url_for('edit_category', id=c.id) }}">
+        {{ c.name }}
+      </a>
+    </h1>
+    <div id="{{ c.name.replace(' ','-') }}" class="item-list">
       {% for i in items %}
-        {% if i.category == c[0] %}
+        {% if i.category_id == c.id %}
           <div class="mb-2">
             <a class="semibold" href="{{ url_for('edit_item', id=i.id) }}">
               {{ i.name.title() }}
@@ -47,9 +62,17 @@
       slideDown(document.getElementById("add-item-form"));
     });
 
-    document.getElementById("hide-form").addEventListener("click", function () {
-      slideUp(this.parentElement);
-      document.getElementById("add-item").parentElement.classList.remove('d-none');
+    const hideButtons = document.querySelectorAll(".hide-form")
+    hideButtons.forEach(e => {
+      e.addEventListener("click", function () {
+        slideUp(this.parentElement);
+        document.getElementById("add-item").parentElement.classList.remove('d-none');
+      })
     });
+
+    document.getElementById('add-category').addEventListener('click', function() {
+      this.parentElement.classList.add('d-none');
+      slideDown(document.getElementById('add-category-form'));
+    })
   </script>
 {% endblock end_scripts %}

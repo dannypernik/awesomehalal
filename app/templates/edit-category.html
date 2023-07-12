@@ -1,20 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Edit item</h1>
+  <h1>Edit category</h1>
   <form method="post" >
     {{ form.hidden_tag() }}
     {{ form.name.label }}
     {{ form.name }}
-    {{ form.price.label }}
-    {{ form.price }}
-    {{ form.category.label }}
-    {{ form.category }}
-    {{ form.description.label }}
-    {{ form.description }}
-    {{ form.is_veg }}
-    {{ form.is_veg.label }}
-    <label for="order">Reorder (Items with lowest numbers are displayed first)</label>
+    <label for="order" class="mt-3">Reorder (Categories with lowest numbers are displayed first)</label>
     {{ form.order }}
     
     <div class="row">
@@ -43,7 +35,7 @@
               </div>
             </div>
             <div class="modal-body">
-              <button class="btn alert d-inline me-2" type="submit" name="delete">Delete {{ item.name.title() }}</button>
+              <button class="btn alert d-inline me-2" type="submit" name="delete">Delete {{ category.name.title() }}</button>
               <button class="btn d-inline" data-bs-dismiss="modal">Cancel</button>
             </div>
           </div>
