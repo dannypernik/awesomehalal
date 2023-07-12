@@ -274,7 +274,7 @@ def items():
 def new_item():
     form = ItemForm()
     if form.validate_on_submit():
-        item = Item(name=form.name.data.lower(), category=form.category.data.lower(), price=form.price.data, \
+        item = Item(name=form.name.data.lower(), price=form.price.data, \
             description=form.description.data, is_veg=form.is_veg.data)
         try:
             db.session.add(item)
@@ -317,7 +317,7 @@ def edit_item(id):
     if form.validate_on_submit():
         if 'save' in request.form:
             item.name=form.name.data.lower()
-            item.category=form.category.data.lower()
+            # item.category=form.category.data.lower()
             item.price=form.price.data
             item.description=form.description.data
             item.order=form.order.data
