@@ -19,7 +19,7 @@
     {{ item_form.is_veg }}
     {{ item_form.is_veg.label(class="ms-2 mt-2") }}
     {{ item_form.order(class="d-none") }}
-    {{ item_form.submit }}
+    {{ item_form.save }}
   </form>
 
   <form id="add-category-form" class="collapsed" action="{{ url_for('new_category') }}" method="post">
@@ -28,7 +28,7 @@
     {{ category_form.hidden_tag() }}
     {{ category_form.name }}
     {{ category_form.order }}
-    {{ category_form.submit }}
+    {{ category_form.save }}
   </form>
 
 

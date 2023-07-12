@@ -108,7 +108,7 @@ class ItemForm(FlaskForm):
     order = DecimalField('Order', render_kw={'placeholder': 'Order'}, \
         validators=(validators.Optional(),))
     is_veg = BooleanField('Vegetarian?')
-    submit = SubmitField('Save')
+    save = SubmitField('Save')
 
 
 class CategoryForm(FlaskForm):
@@ -116,4 +116,4 @@ class CategoryForm(FlaskForm):
         validators=[InputRequired()])
     order = DecimalField('Order', render_kw={'placeholder': 'Order'}, \
         validators=(validators.Optional(),))
-    submit = SubmitField('Save')
+    save = SubmitField('Save')
