@@ -264,6 +264,8 @@ def items():
     category_form = CategoryForm()
     items = Item.query.order_by(Item.order).all()
     categories = Category.query.order_by(Category.order).distinct()
+    category_list = [(0,'Category')]+[(c.id, c.name.title()) for c in categories]
+    item_form.category_id.choices = category_list
 
     return render_template('items.html', title="Menu items", item_form=item_form, \
         category_form=category_form, items=items, categories=categories)
@@ -272,30 +274,35 @@ def items():
 @app.route('/new-item', methods=['POST'])
 @admin_required
 def new_item():
-    form = ItemForm()
-    if form.validate_on_submit():
-        item = Item(name=form.name.data.lower(), price=form.price.data, \
-            description=form.description.data, is_veg=form.is_veg.data)
+    item_form = ItemForm()
+    categories = Category.query.order_by(Category.order).distinct()
+    category_list = [(0,'Category')]+[(c.id, c.name.title()) for c in categories]
+    item_form.category_id.choices = category_list
+    if item_form.category_id.data == 0:
+        flash('Please select a category', 'error')
+        return redirect(url_for('items'))
+    if item_form.validate_on_submit():
+        item = Item(name=item_form.name.data.lower(), category_id=item_form.category_id.data, \
+            price=item_form.price.data, description=item_form.description.data, is_veg=item_form.is_veg.data)
         try:
             db.session.add(item)
             db.session.flush()
-            item.order = item.id
+            item.order = float(item.id)
             db.session.add(item)
             db.session.commit()
             flash(item.name.title() + ' added')
         except:
             db.session.rollback()
             flash(item.name.title() + ' could not be added', 'error')
-        return redirect(url_for('items'))
-    return render_template('items.html')
+    return redirect(url_for('items'))
 
 
 @app.route('/new-category', methods=['POST'])
 @admin_required
 def new_category():
-    form = CategoryForm()
-    if form.validate_on_submit():
-        category = Category(name=form.name.data.lower())
+    category_form = CategoryForm()
+    if category_form.validate_on_submit():
+        category = Category(name=category_form.name.data.lower())
         try:
             db.session.add(category)
             db.session.flush()
@@ -305,8 +312,7 @@ def new_category():
         except:
             db.session.rollback()
             flash(category.name.title() + ' could not be added', 'error')
-        return redirect(url_for('items'))
-    return render_template('items.html')
+    return redirect(url_for('items'))
 
 
 @app.route('/edit-item/<int:id>', methods=['GET', 'POST'])
@@ -314,19 +320,17 @@ def new_category():
 def edit_item(id):
     form = ItemForm()
     item = Item.query.get_or_404(id)
+    categories = Category.query.order_by(Category.order).distinct()
+    category_list = [(c.id, c.name.title()) for c in categories]
+    form.category_id.choices = category_list
     if form.validate_on_submit():
         if 'save' in request.form:
             item.name=form.name.data.lower()
-            # item.category=form.category.data.lower()
+            item.category_id=form.category_id.data
             item.price=form.price.data
             item.description=form.description.data
             item.order=form.order.data
             item.is_veg=form.is_veg.data
-
-            # if form.category_id.data == 0:
-            #     category = Category(name=form.category_id.data)
-            # else:
-            #     category = Category.query.filter_by(name=form.category_id.data).first()
 
             try:
                 db.session.add(item)
@@ -344,7 +348,7 @@ def edit_item(id):
         return redirect(url_for('items'))
     elif request.method == "GET":
         form.name.data=item.name
-        form.category.data=item.category
+        form.category_id.data=item.category_id
         form.price.data=item.price
         form.description.data=item.description
         form.order.data=item.order
@@ -357,6 +361,7 @@ def edit_item(id):
 def edit_category(id):
     form = CategoryForm()
     category = Category.query.get_or_404(id)
+    items = Item.query.filter_by(category_id=id)
     if form.validate_on_submit():
         if 'save' in request.form:
             category.name=form.name.data.lower()
@@ -378,7 +383,8 @@ def edit_category(id):
     elif request.method == "GET":
         form.name.data=category.name
         form.order.data=category.order
-    return render_template('edit-category.html', title="Edit category", form=form, category=category)
+    return render_template('edit-category.html', title="Edit category", form=form, \
+        category=category, items=items)
 
 
 @app.route("/download/<filename>")

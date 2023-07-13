@@ -4,15 +4,14 @@
   <div>
     <button id="add-item" class="btn d-inline-block me-2 mt-0">Add item</button>
     <button id="add-category" class="btn sec d-inline-block me-2 mt-0">Add category</button>
-    <!-- <a href="{{ url_for('new_category') }}" class="btn sec d-inline-block me-2 mt-0">Add category</a> -->
   </div>
 
   <form id="add-item-form" class="collapsed" action="{{ url_for('new_item') }}" method="post">
     <h1 class="mb-3 me-3 d-inline-block">Add item</h1>
     <a class="hide-form" href="#">Hide</a>
-
     {{ item_form.hidden_tag() }}
     {{ item_form.name }}
+    {{ item_form.category_id(class="mt-2") }}
     {{ item_form.price }}
     {{ item_form.description }}
     {{ item_form.is_veg }}
@@ -26,7 +25,7 @@
     <a class="hide-form" href="#">Hide</a>
     {{ category_form.hidden_tag() }}
     {{ category_form.name }}
-    {{ category_form.order }}
+    {{ category_form.order(class="d-none") }}
     {{ category_form.save }}
   </form>
 

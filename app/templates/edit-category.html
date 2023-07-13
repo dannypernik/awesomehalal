@@ -33,10 +33,18 @@
               <div class="modal-header pb-0">
                 <h1 class="modal-title">Are you sure?</h1>
               </div>
-            </div>
+            </div>              
             <div class="modal-body">
+              {% if items.count() > 0 %}
+                <p>You are about to delete all of the items in this category:</p>
+                {% for i in items %}
+                  <ul>
+                    <li>{{ i.name.title() }}</li>
+                  </ul> 
+                {% endfor %}
+              {% endif %}
               <button class="btn alert d-inline me-2" type="submit" name="delete">Delete {{ category.name.title() }}</button>
-              <button class="btn d-inline" data-bs-dismiss="modal">Cancel</button>
+              <a class="btn d-inline-block" data-bs-dismiss="modal">Cancel</a>
             </div>
           </div>
         </div>

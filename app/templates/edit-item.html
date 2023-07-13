@@ -4,16 +4,27 @@
   <h1>Edit item</h1>
   <form method="post" >
     {{ form.hidden_tag() }}
-    {{ form.name.label }}
-    {{ form.name }}
-    {{ form.price.label }}
-    {{ form.price }}
-    <!-- {{ form.category.label }}
-    {{ form.category }} -->
-    {{ form.description.label }}
-    {{ form.description }}
-    {{ form.is_veg }}
-    {{ form.is_veg.label }}
+    <p>
+      {{ form.name.label }}
+      {{ form.name }}
+    </p>
+    <p>
+      {{ form.category_id.label }}
+      {{ form.category_id(class="d-block mt-2") }}
+    </p>
+    <p>
+      {{ form.price.label }}
+      {{ form.price }}
+    </p>
+    <p>
+      {{ form.description.label }}
+      {{ form.description }}
+    </p>
+    <p>
+      {{ form.is_veg }}
+      {{ form.is_veg.label }}
+    </p>
+
     <label for="order">Reorder (Items with lowest numbers are displayed first)</label>
     {{ form.order }}
     
@@ -44,7 +55,7 @@
             </div>
             <div class="modal-body">
               <button class="btn alert d-inline me-2" type="submit" name="delete">Delete {{ item.name.title() }}</button>
-              <button class="btn d-inline" data-bs-dismiss="modal">Cancel</button>
+              <a class="btn d-inline-block" data-bs-dismiss="modal">Cancel</a>
             </div>
           </div>
         </div>

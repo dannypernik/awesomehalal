@@ -103,8 +103,7 @@ class ItemForm(FlaskForm):
     price = StringField('Price', render_kw={'placeholder': 'Price'}, \
         validators=[InputRequired()])
     description = TextAreaField('Description', render_kw={'placeholder': 'Description'})
-    # category = StringField('Category', render_kw={'placeholder': 'Category'}, \
-    #     validators=[InputRequired()])
+    category_id = SelectField('Category', coerce=int)
     order = DecimalField('Order', render_kw={'placeholder': 'Order'}, \
         validators=(validators.Optional(),))
     is_veg = BooleanField('Vegetarian?')
