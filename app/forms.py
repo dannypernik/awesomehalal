@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm, RecaptchaField
 from wtforms import StringField, BooleanField, PasswordField, TextAreaField, \
     SubmitField, IntegerField, SelectField, DecimalField, validators
-from wtforms.fields.html5 import DateField
+from wtforms.fields.html5 import DateField, EmailField
 from wtforms.validators import ValidationError, InputRequired, DataRequired, \
     Email, EqualTo, Length
 from app.models import User, Item
@@ -16,7 +16,7 @@ def validate_email(self, email):
 class ContactForm(FlaskForm):
     first_name = StringField('First name', render_kw={"placeholder": "First name"}, \
         validators=[InputRequired()])
-    email = StringField('Email address', render_kw={"placeholder": "Email address"}, \
+    email = EmailField('Email address', render_kw={"placeholder": "Email address"}, \
         validators=[InputRequired(), Email(message="Please enter a valid email address")])
     phone = StringField('Phone number (optional)', render_kw={"placeholder": "Phone number (optional)"})
     subject = StringField('Subject', render_kw={'placeholder': 'Subject'}, default='Message')
@@ -28,14 +28,14 @@ class ContactForm(FlaskForm):
 class EmailListForm(FlaskForm):
     first_name = StringField('First name', render_kw={"placeholder": "First name"}, \
         validators=[InputRequired()])
-    email = StringField('Email address', render_kw={"placeholder": "Email address"}, \
+    email = EmailField('Email address', render_kw={"placeholder": "Email address"}, \
         validators=[InputRequired(), Email(message="Please enter a valid email address"), \
             validate_email])
     submit = SubmitField()
 
 
 class SignupForm(FlaskForm):
-    email = StringField('Email address', render_kw={"placeholder": "Email address"}, \
+    email = EmailField('Email address', render_kw={"placeholder": "Email address"}, \
         validators=[InputRequired(), Email(message="Please enter a valid email address"), \
             validate_email])
     first_name = StringField('First name', render_kw={"placeholder": "First name"}, \
@@ -50,7 +50,7 @@ class SignupForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    email = StringField('Email address', render_kw={"placeholder": "Email address"}, \
+    email = EmailField('Email address', render_kw={"placeholder": "Email address"}, \
         validators=[InputRequired(), Email(message="Please enter a valid email address")])
     password = PasswordField('Password', render_kw={"placeholder": "Password"}, \
         validators=[InputRequired()])
@@ -59,7 +59,7 @@ class LoginForm(FlaskForm):
 
 
 class RequestPasswordResetForm(FlaskForm):
-    email = StringField('Email address', render_kw={"placeholder": "Email address"}, \
+    email = EmailField('Email address', render_kw={"placeholder": "Email address"}, \
         validators=[InputRequired(), Email(message="Please enter a valid email address")])
     submit = SubmitField('Request password reset')
 
@@ -81,7 +81,7 @@ class UserForm(FlaskForm):
         validators=[InputRequired()])
     last_name = StringField('Last name', render_kw={"placeholder": "Last name"}, \
         validators=[InputRequired()])
-    email = StringField('Email address', render_kw={"placeholder": "Email address"}, \
+    email = EmailField('Email address', render_kw={"placeholder": "Email address"}, \
         validators=[InputRequired(), Email(message="Please enter a valid email address")])
     is_admin = BooleanField('Admin')
     submit = SubmitField('Save')
